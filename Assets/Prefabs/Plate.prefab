@@ -100,17 +100,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327517226565948636}
-  m_LocalRotation: {x: -0.9999989, y: -0, z: 0.0015181645, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.01354}
+  m_LocalRotation: {x: -1, y: 0, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5419978568625548532}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180.174, z: -180}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.0019}
-  m_SizeDelta: {x: 20, y: 5}
+  m_AnchoredPosition: {x: 0.02, y: 0}
+  m_SizeDelta: {x: 180, y: 53.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8657757737333382438
 MeshRenderer:
@@ -173,7 +173,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: '1
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b51d88c5a25a036459cbf941b1f572a1, type: 2}
   m_sharedMaterial: {fileID: 4471081021614032438, guid: b51d88c5a25a036459cbf941b1f572a1, type: 2}
@@ -200,12 +202,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.1
-  m_fontSizeBase: 0.1
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 0.05
-  m_fontSizeMax: 0.1
+  m_fontSizeMin: 53.36
+  m_fontSizeMax: 1000
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -257,7 +259,7 @@ GameObject:
   - component: {fileID: 8978060409884435281}
   - component: {fileID: 6592299080548358043}
   - component: {fileID: 3725058296081796022}
-  - component: {fileID: 9122938150258776557}
+  - component: {fileID: -2922139130395073111}
   m_Layer: 0
   m_Name: Plate
   m_TagString: Untagged
@@ -274,7 +276,7 @@ Transform:
   m_GameObject: {fileID: 4646713599037257294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 130, y: 130, z: 130}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2881394674259225882}
   - {fileID: 1672367196585912384}
@@ -347,7 +349,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 6592299080548358043}
   hitParticles: {fileID: 127072, guid: 7f45705f5f30d8a45af0fc2eb8c8998a, type: 3}
   explodeParticles: {fileID: 130848, guid: 9fbfdb8d923148e4299b295c120e2246, type: 3}
---- !u!65 &9122938150258776557
+--- !u!65 &-2922139130395073111
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -356,10 +358,10 @@ BoxCollider:
   m_GameObject: {fileID: 4646713599037257294}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.02, z: 0.135906}
-  m_Center: {x: 0, y: 0.0002019286, z: 0.05795311}
+  m_Size: {x: 2.6, y: 2.6, z: 2.6}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8733145786704672843
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,6 +34,11 @@ public class Plate : MonoBehaviour
         TakeDamage(1);
     }
 
+    private void OnMouseEnter()
+    {
+        TakeDamage(1);
+    }
+
     public void TakeDamage(int damageValue)
     {
         value -= damageValue;
@@ -66,7 +71,8 @@ public class Plate : MonoBehaviour
         SFX.Instance.PlayPlateDestroySound();
         ShakePlate();
         DisableText();
-        Destroy(gameObject);
+
+        PlatesSpawner.Instance.DecreasePlatesCount(this);
     }
 
     private bool CheckOnZeroValue()
