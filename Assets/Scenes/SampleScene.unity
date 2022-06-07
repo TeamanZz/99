@@ -524,7 +524,11 @@ MonoBehaviour:
   generalValue: 1
   startPlateXPos: -5
   startPlateZPos: -11.25
-  topPlatesCurrentCount: 50
+  currentTopPlates: []
+  firstContainerElements: []
+  secondContainerElements: []
+  isFirstParentOnTop: 1
+  needSpawnToFirstParent: 1
 --- !u!114 &1608180906
 MonoBehaviour:
   m_ObjectHideFlags: 0
