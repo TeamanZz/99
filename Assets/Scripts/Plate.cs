@@ -23,7 +23,8 @@ public class Plate : MonoBehaviour
 
     public void SetNewNonZeroValue(int newValue = 1)
     {
-        value = newValue;
+        int newValueRand = Random.Range(1, newValue + 1);
+        value = newValueRand;
 
         UpdateTextValue();
         SetColorDependsOnValue();
@@ -34,10 +35,10 @@ public class Plate : MonoBehaviour
         TakeDamage(1);
     }
 
-    private void OnMouseEnter()
-    {
-        TakeDamage(1);
-    }
+    // private void OnMouseEnter()
+    // {
+    //     TakeDamage(1);
+    // }
 
     public void TakeDamage(int damageValue)
     {

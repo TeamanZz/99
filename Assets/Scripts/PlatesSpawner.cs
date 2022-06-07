@@ -38,9 +38,9 @@ public class PlatesSpawner : MonoBehaviour
 
     public void SpawnNewPlatesField()
     {
-        // generalValue++;
+        generalValue++;
         ResetLastSpawnPoints();
-        for (var i = 0; i < 50; i++)
+        for (var i = 0; i < 40; i++)
         {
             SpawnPlatesFieldByGeneralValue();
         }
@@ -57,6 +57,7 @@ public class PlatesSpawner : MonoBehaviour
         if (needSpawnToFirstParent)
         {
             newPlate = Instantiate(platePrefab, newPlatePosition, Quaternion.Euler(270, 0, 0), firstPlatesParent.transform);
+            newPlate.transform.localPosition = new Vector3(newPlate.transform.localPosition.x, 0, newPlate.transform.localPosition.z);
             plateComponent = newPlate.GetComponent<Plate>();
             firstContainerElements.Add(plateComponent);
         }
@@ -67,6 +68,8 @@ public class PlatesSpawner : MonoBehaviour
             plateComponent = newPlate.GetComponent<Plate>();
             secondContainerElements.Add(plateComponent);
         }
+        // newPlate.transform.localScale = Vector3.zero;
+        // newPlate.transform.DOScale(Vector3.one, 1).SetEase(Ease.OutBack);
         plateComponent.SetNewNonZeroValue(generalValue);
         CalculateNewPlatePosition();
     }
@@ -81,7 +84,7 @@ public class PlatesSpawner : MonoBehaviour
             SwapParentsPositions();
             ReinitializeTopObjects();
             HandleNewTopPlatesOnSwap();
-            SpawnNewPlatesField();
+            StartCoroutine(SpawnPlatesAfterDelay());
         }
     }
 
@@ -95,7 +98,7 @@ public class PlatesSpawner : MonoBehaviour
 
     private void HandleNewTopPlatesOnSwap()
     {
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 40; i++)
         {
             Transform topParentChild = currentTopParent.transform.GetChild(i);
             topParentChild.DOShakeScale(1, 0.1f, 10, 30, true).SetEase(Ease.InOutBack);
@@ -107,9 +110,16 @@ public class PlatesSpawner : MonoBehaviour
     {
         Vector3 firstParentPosition = firstPlatesParent.transform.position;
         Vector3 secondParentPosition = secondPlatesParent.transform.position;
-
-        firstPlatesParent.transform.DOMove(secondParentPosition, 2);
-        secondPlatesParent.transform.DOMove(firstParentPosition, 2);
+        if (currentTopParent == firstPlatesParent)
+        {
+            firstPlatesParent.transform.position = secondParentPosition;
+            secondPlatesParent.transform.DOMove(firstParentPosition, 2);
+        }
+        else
+        {
+            secondPlatesParent.transform.position = firstParentPosition;
+            firstPlatesParent.transform.DOMove(secondParentPosition, 2);
+        }
     }
 
     private void ReinitializeTopObjects()
@@ -126,7 +136,11 @@ public class PlatesSpawner : MonoBehaviour
         }
     }
 
-    // private IEnumerator Spawn
+    private IEnumerator SpawnPlatesAfterDelay()
+    {
+        yield return new WaitForSeconds(0);
+        SpawnNewPlatesField();
+    }
 
     private void ResetLastSpawnPoints()
     {
@@ -148,7 +162,7 @@ public class PlatesSpawner : MonoBehaviour
     private void SpawnStartPlates()
     {
         ResetLastSpawnPoints();
-        for (var i = 0; i < 50; i++)
+        for (var i = 0; i < 40; i++)
         {
             SpawnPlatesFieldByGeneralValue();
             firstPlatesParent.transform.GetChild(i).GetComponent<BoxCollider>().enabled = true;
