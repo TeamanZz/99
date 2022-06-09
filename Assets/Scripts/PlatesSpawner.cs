@@ -22,9 +22,11 @@ public class PlatesSpawner : MonoBehaviour
     [SerializeField] private List<Plate> currentTopPlates = new List<Plate>();
     [SerializeField] private List<Plate> firstContainerElements = new List<Plate>();
     [SerializeField] private List<Plate> secondContainerElements = new List<Plate>();
-
+    
     private float lastPlateXPos;
     private float lastPlateZPos;
+
+    private Vector2Int cellPosition;
 
     private void Awake()
     {
@@ -53,6 +55,7 @@ public class PlatesSpawner : MonoBehaviour
         GameObject newPlate;
         Plate plateComponent;
         Vector3 newPlatePosition = new Vector3(lastPlateXPos, 0, lastPlateZPos);
+        Debug.Log("X pos " + lastPlateXPos + " | Z pos " + lastPlateZPos);
 
         if (needSpawnToFirstParent)
         {
@@ -68,8 +71,7 @@ public class PlatesSpawner : MonoBehaviour
             plateComponent = newPlate.GetComponent<Plate>();
             secondContainerElements.Add(plateComponent);
         }
-        // newPlate.transform.localScale = Vector3.zero;
-        // newPlate.transform.DOScale(Vector3.one, 1).SetEase(Ease.OutBack);
+
         plateComponent.SetNewNonZeroValue(generalValue);
         CalculateNewPlatePosition();
     }
@@ -88,14 +90,6 @@ public class PlatesSpawner : MonoBehaviour
         }
     }
 
-    private void ReassignCurrentTopParent()
-    {
-        if (currentTopParent == firstPlatesParent)
-            currentTopParent = secondPlatesParent;
-        else
-            currentTopParent = firstPlatesParent;
-    }
-
     private void HandleNewTopPlatesOnSwap()
     {
         for (int i = 0; i < 40; i++)
@@ -110,6 +104,7 @@ public class PlatesSpawner : MonoBehaviour
     {
         Vector3 firstParentPosition = firstPlatesParent.transform.position;
         Vector3 secondParentPosition = secondPlatesParent.transform.position;
+        
         if (currentTopParent == firstPlatesParent)
         {
             firstPlatesParent.transform.position = secondParentPosition;
@@ -162,6 +157,7 @@ public class PlatesSpawner : MonoBehaviour
     private void SpawnStartPlates()
     {
         ResetLastSpawnPoints();
+        
         for (var i = 0; i < 40; i++)
         {
             SpawnPlatesFieldByGeneralValue();

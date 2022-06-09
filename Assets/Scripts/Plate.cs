@@ -6,25 +6,20 @@ using DG.Tweening;
 
 public class Plate : MonoBehaviour
 {
-    public int value;
+    [Header("DATA Settings")]
+    public int valueToDestroy;
 
+    [Header("View Settings")]
     [SerializeField] private TextMeshPro valueText;
     [SerializeField] private MeshRenderer meshRenderer;
 
     [SerializeField] private GameObject hitParticles;
     [SerializeField] private GameObject explodeParticles;
 
-    private Vector3 startPos;
-
-    private void Awake()
-    {
-        startPos = transform.position;
-    }
-
     public void SetNewNonZeroValue(int newValue = 1)
     {
         int newValueRand = Random.Range(1, newValue + 1);
-        value = newValueRand;
+        valueToDestroy = newValueRand;
 
         UpdateTextValue();
         SetColorDependsOnValue();
@@ -35,14 +30,20 @@ public class Plate : MonoBehaviour
         TakeDamage(1);
     }
 
-    // private void OnMouseEnter()
-    // {
-    //     TakeDamage(1);
-    // }
+    private void OnMouseEnter()
+    {
+        if (Knife.knife.readyToUse == false)
+            return;
+
+        TakeDamage(1);
+    }
 
     public void TakeDamage(int damageValue)
     {
-        value -= damageValue;
+        valueToDestroy -= damageValue;
+        if (Knife.knife.isOpen)
+            Knife.knife.AddFillPoint(damageValue);
+
         ShakePlate();
         var newParticles = Instantiate(hitParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
 
@@ -61,12 +62,12 @@ public class Plate : MonoBehaviour
 
     private void UpdateTextValue()
     {
-        valueText.text = value.ToString();
+        valueText.text = valueToDestroy.ToString();
     }
 
     private void KillPlate()
     {
-        value = 0;
+        valueToDestroy = 0;
         var newParticles = Instantiate(explodeParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
         SetDefaultColor();
         SFX.Instance.PlayPlateDestroySound();
@@ -78,7 +79,7 @@ public class Plate : MonoBehaviour
 
     private bool CheckOnZeroValue()
     {
-        return (value <= 0);
+        return (valueToDestroy <= 0);
     }
 
     private void DisableText()
@@ -93,12 +94,12 @@ public class Plate : MonoBehaviour
 
     private void SetColorDependsOnValue()
     {
-        var newColor = ColorsHandler.Instance.GetLerpedColor(value);
+        var newColor = ColorsHandler.Instance.GetLerpedColor(valueToDestroy);
         var currentMaterial = meshRenderer.material;
         meshRenderer.material = new Material(currentMaterial);
         meshRenderer.material.color = newColor;
 
-        valueText.color = ColorsHandler.Instance.GetTextColor(value);
+        valueText.color = ColorsHandler.Instance.GetTextColor(valueToDestroy);
     }
 
     private void SetDefaultColor()
