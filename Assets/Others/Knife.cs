@@ -41,7 +41,7 @@ public class Knife : MonoBehaviour
 
     public void AddFillPoint(int value)
     {
-        if (!isOpen)
+        if (!isOpen && readyToUse)
             return;
 
         currentPoints += value;

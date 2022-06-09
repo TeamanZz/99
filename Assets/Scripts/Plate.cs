@@ -8,6 +8,11 @@ public class Plate : MonoBehaviour
 {
     [Header("DATA Settings")]
     public int valueToDestroy;
+    public Vector2Int currentPosition;
+
+    [Header("Connect Settings")]
+    public bool isSolo = true;
+    public ExplosivePlate explosiveInstruction;
 
     [Header("View Settings")]
     [SerializeField] private TextMeshPro valueText;
@@ -27,6 +32,9 @@ public class Plate : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (isSolo == false)
+            return;
+
         TakeDamage(1);
     }
 
@@ -35,10 +43,13 @@ public class Plate : MonoBehaviour
         if (Knife.knife.readyToUse == false)
             return;
 
+        if (isSolo == false)
+            return;
+
         TakeDamage(1);
     }
 
-    public void TakeDamage(int damageValue)
+    public bool TakeDamage(int damageValue)
     {
         valueToDestroy -= damageValue;
         if (Knife.knife.isOpen)
@@ -52,11 +63,13 @@ public class Plate : MonoBehaviour
         if (CheckOnZeroValue())
         {
             KillPlate();
+            return true;
         }
         else
         {
             UpdateTextValue();
             SetColorDependsOnValue();
+            return false;
         }
     }
 
@@ -65,8 +78,14 @@ public class Plate : MonoBehaviour
         valueText.text = valueToDestroy.ToString();
     }
 
-    private void KillPlate()
+    public void KillPlate()
     {
+        if(!isSolo)
+        {
+            if (explosiveInstruction != null)
+                explosiveInstruction.Explotion();
+        }
+
         valueToDestroy = 0;
         var newParticles = Instantiate(explodeParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
         SetDefaultColor();
@@ -95,18 +114,24 @@ public class Plate : MonoBehaviour
     private void SetColorDependsOnValue()
     {
         var newColor = ColorsHandler.Instance.GetLerpedColor(valueToDestroy);
-        var currentMaterial = meshRenderer.material;
-        meshRenderer.material = new Material(currentMaterial);
-        meshRenderer.material.color = newColor;
+        if (meshRenderer != null)
+        {
+            var currentMaterial = meshRenderer.material;
+            meshRenderer.material = new Material(currentMaterial);
+            meshRenderer.material.color = newColor;
 
-        valueText.color = ColorsHandler.Instance.GetTextColor(valueToDestroy);
+            valueText.color = ColorsHandler.Instance.GetTextColor(valueToDestroy);
+        }
     }
 
     private void SetDefaultColor()
     {
         var newColor = ColorsHandler.Instance.GetDefaultColor();
-        var currentMaterial = meshRenderer.material;
-        meshRenderer.material = new Material(currentMaterial);
-        meshRenderer.material.color = newColor;
+        if (meshRenderer != null)
+        {
+            var currentMaterial = meshRenderer.material;
+            meshRenderer.material = new Material(currentMaterial);
+            meshRenderer.material.color = newColor;
+        }
     }
 }

@@ -7,7 +7,7 @@ public class PlatesSpawner : MonoBehaviour
 {
     public static PlatesSpawner Instance;
 
-    [SerializeField] private GameObject platePrefab;
+    [SerializeField] private List<GameObject> platePrefab;
     [SerializeField] private GameObject firstPlatesParent;
     [SerializeField] private GameObject secondPlatesParent;
     [SerializeField] private GameObject currentTopParent;
@@ -19,15 +19,21 @@ public class PlatesSpawner : MonoBehaviour
 
     [SerializeField] private bool needSpawnToFirstParent = true;
 
+    [Header("Grid Controller")]
+    public Vector2Int gridSize = new Vector2Int(5, 8);
+
+    public List<Plate> currentCordPlates = new List<Plate>();
     [SerializeField] private List<Plate> currentTopPlates = new List<Plate>();
     [SerializeField] private List<Plate> firstContainerElements = new List<Plate>();
     [SerializeField] private List<Plate> secondContainerElements = new List<Plate>();
-    
+
     private float lastPlateXPos;
     private float lastPlateZPos;
 
-    private Vector2Int cellPosition;
+    private Vector2Int grid = new Vector2Int(0, 0);
 
+
+    
     private void Awake()
     {
         Instance = this;
@@ -55,22 +61,28 @@ public class PlatesSpawner : MonoBehaviour
         GameObject newPlate;
         Plate plateComponent;
         Vector3 newPlatePosition = new Vector3(lastPlateXPos, 0, lastPlateZPos);
-        Debug.Log("X pos " + lastPlateXPos + " | Z pos " + lastPlateZPos);
+
+        int number = Random.Range(-8, platePrefab.Count + 1);
+        number = Mathf.Clamp(number, 0, platePrefab.Count - 1);
+        Debug.Log("Number " + number);
 
         if (needSpawnToFirstParent)
         {
-            newPlate = Instantiate(platePrefab, newPlatePosition, Quaternion.Euler(270, 0, 0), firstPlatesParent.transform);
+            newPlate = Instantiate(platePrefab[number], newPlatePosition, Quaternion.Euler(270, 0, 0), firstPlatesParent.transform);
             newPlate.transform.localPosition = new Vector3(newPlate.transform.localPosition.x, 0, newPlate.transform.localPosition.z);
             plateComponent = newPlate.GetComponent<Plate>();
             firstContainerElements.Add(plateComponent);
         }
         else
         {
-            newPlate = Instantiate(platePrefab, newPlatePosition, Quaternion.Euler(270, 0, 0), secondPlatesParent.transform);
+            newPlate = Instantiate(platePrefab[number], newPlatePosition, Quaternion.Euler(270, 0, 0), secondPlatesParent.transform);
             newPlate.transform.localPosition = new Vector3(newPlate.transform.localPosition.x, 0, newPlate.transform.localPosition.z);
             plateComponent = newPlate.GetComponent<Plate>();
             secondContainerElements.Add(plateComponent);
         }
+
+        //  grid
+        plateComponent.currentPosition = grid;
 
         plateComponent.SetNewNonZeroValue(generalValue);
         CalculateNewPlatePosition();
@@ -81,8 +93,12 @@ public class PlatesSpawner : MonoBehaviour
         currentTopPlates.Remove(plate);
         Destroy(plate.gameObject);
 
+
         if (currentTopPlates.Count == 0)
         {
+            currentCordPlates.Clear();
+            currentTopPlates.Clear();
+
             SwapParentsPositions();
             ReinitializeTopObjects();
             HandleNewTopPlatesOnSwap();
@@ -104,7 +120,7 @@ public class PlatesSpawner : MonoBehaviour
     {
         Vector3 firstParentPosition = firstPlatesParent.transform.position;
         Vector3 secondParentPosition = secondPlatesParent.transform.position;
-        
+
         if (currentTopParent == firstPlatesParent)
         {
             firstPlatesParent.transform.position = secondParentPosition;
@@ -117,18 +133,33 @@ public class PlatesSpawner : MonoBehaviour
         }
     }
 
+    [ContextMenu("Destroy random")]
+    public void DestroyRandomPlate()
+    {
+        Vector2Int position = new Vector2Int(Random.Range(0, gridSize.x - 1), Random.Range(0, gridSize.y -1));
+        int number = position.x * 5 + position.y + 1;
+        Debug.Log(currentCordPlates[number]);
+            
+        if(currentCordPlates[number].gameObject != null)
+            Destroy(currentCordPlates[number].gameObject);
+    }
+
     private void ReinitializeTopObjects()
     {
         if (currentTopParent == firstPlatesParent)
         {
+            grid = Vector2Int.zero;
             currentTopParent = secondPlatesParent;
             currentTopPlates = secondContainerElements;
         }
         else
         {
+            grid = Vector2Int.zero;
             currentTopParent = firstPlatesParent;
             currentTopPlates = firstContainerElements;
         }
+
+        currentCordPlates.AddRange(currentTopPlates);
     }
 
     private IEnumerator SpawnPlatesAfterDelay()
@@ -147,8 +178,15 @@ public class PlatesSpawner : MonoBehaviour
     {
         lastPlateXPos += 2.5f;
 
+        //  grid
+        grid.x += 1;
+
         if (lastPlateXPos == 7.5f)
         {
+            //  grid
+            grid.x = 0;
+            grid.y += 1;
+
             lastPlateZPos += 2.5f;
             lastPlateXPos = startPlateXPos;
         }
@@ -157,13 +195,14 @@ public class PlatesSpawner : MonoBehaviour
     private void SpawnStartPlates()
     {
         ResetLastSpawnPoints();
-        
         for (var i = 0; i < 40; i++)
         {
             SpawnPlatesFieldByGeneralValue();
             firstPlatesParent.transform.GetChild(i).GetComponent<BoxCollider>().enabled = true;
         }
         currentTopPlates = firstContainerElements;
+        currentCordPlates.AddRange(currentTopPlates);
+
         needSpawnToFirstParent = !needSpawnToFirstParent;
 
         SpawnNewPlatesField();
