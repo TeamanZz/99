@@ -187,6 +187,9 @@ public class PlatesSpawner : MonoBehaviour
             grid.x = 0;
             grid.y += 1;
 
+            if (grid.y == 8)
+                grid.y = 0;
+
             lastPlateZPos += 2.5f;
             lastPlateXPos = startPlateXPos;
         }

@@ -389,6 +389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueToDestroy: 0
   currentPosition: {x: 0, y: 0}
+  isSolo: 0
+  explosiveInstruction: {fileID: 8156896389817902805}
   valueText: {fileID: 6102905222415711430}
   meshRenderer: {fileID: 0}
   hitParticles: {fileID: 127072, guid: 7f45705f5f30d8a45af0fc2eb8c8998a, type: 3}
@@ -406,6 +408,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlate: {fileID: 3725058296081796022}
+  isActive: 1
+  platesFromDestroy: []
 --- !u!1 &8733145786704672843
 GameObject:
   m_ObjectHideFlags: 0

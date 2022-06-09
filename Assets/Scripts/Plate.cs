@@ -78,14 +78,19 @@ public class Plate : MonoBehaviour
         valueText.text = valueToDestroy.ToString();
     }
 
-    public void KillPlate()
+    public void CheckForContinuation()
     {
-        if(!isSolo)
+        if (explosiveInstruction != null)
         {
-            if (explosiveInstruction != null)
-                explosiveInstruction.Explotion();
+            explosiveInstruction.Explotion();
+            Debug.Log("Continue");
         }
 
+        KillPlate();
+    }
+
+    public void KillPlate()
+    {
         valueToDestroy = 0;
         var newParticles = Instantiate(explodeParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
         SetDefaultColor();
