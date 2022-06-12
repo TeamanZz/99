@@ -12,8 +12,8 @@ public class Plate : MonoBehaviour
 
     [Header("Connect Settings")]
     public bool isSolo = true;
-    public ExplosivePlate explosiveInstruction;
-
+    //public ExplosivePlate explosiveInstruction;
+    
     [Header("View Settings")]
     [SerializeField] private TextMeshPro valueText;
     [SerializeField] private MeshRenderer meshRenderer;
@@ -30,7 +30,7 @@ public class Plate : MonoBehaviour
         SetColorDependsOnValue();
     }
 
-    private void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
         if (isSolo == false)
             return;
@@ -38,7 +38,7 @@ public class Plate : MonoBehaviour
         TakeDamage(1);
     }
 
-    private void OnMouseEnter()
+    protected virtual void OnMouseEnter()
     {
         if (Knife.knife.readyToUse == false)
             return;
@@ -78,14 +78,8 @@ public class Plate : MonoBehaviour
         valueText.text = valueToDestroy.ToString();
     }
 
-    public void CheckForContinuation()
+    public virtual void CheckForContinuation()
     {
-        if (explosiveInstruction != null)
-        {
-            explosiveInstruction.Explotion();
-            Debug.Log("Continue");
-        }
-
         KillPlate();
     }
 

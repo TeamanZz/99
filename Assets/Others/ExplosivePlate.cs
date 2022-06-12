@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosivePlate : MonoBehaviour
+public class ExplosivePlate : Plate
 {
-    public Plate currentPlate;
+    //public Plate currentPlate;
+    
+    //public ExplosivePlate explosiveInstruction;
     public bool isActive = true;
 
     public bool isUsed = false;
 
-    private void OnMouseDown()
+    protected override void OnMouseDown()
     {
         if (isActive == false)
             return;
 
-        if (currentPlate.TakeDamage(1) == true)
+        if (TakeDamage(1) == true)
             Explotion();
     }
 
-    private void OnMouseEnter()
+    protected override void OnMouseEnter()
     {
         if (Knife.knife.readyToUse == false)
             return;
@@ -26,9 +28,10 @@ public class ExplosivePlate : MonoBehaviour
         if (isActive == false)
             return;
 
-        if (currentPlate.TakeDamage(1) == true)
+        if (TakeDamage(1) == true)
             Explotion();
     }
+
     public List<Plate> platesFromDestroy = new List<Plate>();
     [ContextMenu("Explotion")]
     public void Explotion()
@@ -36,23 +39,24 @@ public class ExplosivePlate : MonoBehaviour
         if (isUsed)
             return;
 
-        int newPosition = currentPlate.currentPosition.x + currentPlate.currentPosition.y * 5;
+        int newPosition = currentPosition.x + currentPosition.y * 5;
         Debug.Log("Current osition = " + newPosition);
 
-        if (currentPlate.currentPosition.y < PlatesSpawner.Instance.gridSize.y - 1)
-            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPlate.currentPosition.x, currentPlate.currentPosition.y + 1)));
+        if (currentPosition.y < PlatesSpawner.Instance.gridSize.y - 1)
+            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPosition.x, currentPosition.y + 1)));
 
-        if (currentPlate.currentPosition.y > 0)
-            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPlate.currentPosition.x, currentPlate.currentPosition.y - 1)));
+        if (currentPosition.y > 0)
+            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPosition.x, currentPosition.y - 1)));
         
-        if (currentPlate.currentPosition.x < PlatesSpawner.Instance.gridSize.x - 1)
-            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPlate.currentPosition.x + 1, currentPlate.currentPosition.y)));
+        if (currentPosition.x < PlatesSpawner.Instance.gridSize.x - 1)
+            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPosition.x + 1, currentPosition.y)));
 
-        if (currentPlate.currentPosition.x > 0)
-            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPlate.currentPosition.x - 1, currentPlate.currentPosition.y)));
+        if (currentPosition.x > 0)
+            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPosition.x - 1, currentPosition.y)));
 
         isUsed = true;
-        currentPlate.isSolo = true;
+        isSolo = true;
+
         foreach (var plate in platesFromDestroy)
         {
             if (plate != null)
@@ -60,7 +64,14 @@ public class ExplosivePlate : MonoBehaviour
                 plate.CheckForContinuation();
             }
         }
-        currentPlate.explosiveInstruction = null;
+
+        //explosiveInstruction = null;
+    }
+
+    public override void CheckForContinuation()
+    {
+        Explotion();
+        base.CheckForContinuation();
     }
 
     public Plate FindPlate(Vector2Int position)

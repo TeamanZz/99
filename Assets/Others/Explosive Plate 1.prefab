@@ -336,10 +336,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5419978568625548532}
   - component: {fileID: -2922139130395073111}
-  - component: {fileID: 3725058296081796022}
   - component: {fileID: 8156896389817902805}
   m_Layer: 0
-  m_Name: Explosive Plate
+  m_Name: Explosive Plate 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -375,26 +374,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6, y: 2.6, z: 2.6}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3725058296081796022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4646713599037257294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72d794eb6054cd4f9432e51f01d1ccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  valueToDestroy: 0
-  currentPosition: {x: 0, y: 0}
-  isSolo: 0
-  explosiveInstruction: {fileID: 8156896389817902805}
-  valueText: {fileID: 6102905222415711430}
-  meshRenderer: {fileID: 0}
-  hitParticles: {fileID: 127072, guid: 7f45705f5f30d8a45af0fc2eb8c8998a, type: 3}
-  explodeParticles: {fileID: 130848, guid: 9fbfdb8d923148e4299b295c120e2246, type: 3}
 --- !u!114 &8156896389817902805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,8 +386,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2b52d29bd39f442a857464944d6b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPlate: {fileID: 3725058296081796022}
+  valueToDestroy: 0
+  currentPosition: {x: 0, y: 0}
+  isSolo: 0
+  explosiveInstruction: {fileID: 0}
+  valueText: {fileID: 6102905222415711430}
+  meshRenderer: {fileID: 0}
+  hitParticles: {fileID: 127072, guid: 7f45705f5f30d8a45af0fc2eb8c8998a, type: 3}
+  explodeParticles: {fileID: 130848, guid: 9fbfdb8d923148e4299b295c120e2246, type: 3}
   isActive: 1
+  isUsed: 0
   platesFromDestroy: []
 --- !u!1 &8733145786704672843
 GameObject:
