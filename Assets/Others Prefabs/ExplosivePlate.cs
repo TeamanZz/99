@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class ExplosivePlate : Plate
 {
-    //public Plate currentPlate;
-    
-    //public ExplosivePlate explosiveInstruction;
-    public bool isActive = true;
-
+    [Header("Explote Settings")]
     public bool isUsed = false;
+    public List<Plate> platesFromDestroy = new List<Plate>();
 
     protected override void OnMouseDown()
-    {
-        if (isActive == false)
-            return;
-
+    {  
         if (TakeDamage(1) == true)
             Explotion();
     }
@@ -25,38 +19,33 @@ public class ExplosivePlate : Plate
         if (Knife.knife.readyToUse == false)
             return;
 
-        if (isActive == false)
-            return;
-
         if (TakeDamage(1) == true)
             Explotion();
     }
 
-    public List<Plate> platesFromDestroy = new List<Plate>();
     [ContextMenu("Explotion")]
     public void Explotion()
     {
         if (isUsed)
             return;
 
-        int newPosition = currentPosition.x + currentPosition.y * 5;
+        int newPosition = currentIndex.x + currentIndex.y * 5;
         Debug.Log("Current osition = " + newPosition);
 
-        if (currentPosition.y < PlatesSpawner.Instance.gridSize.y - 1)
-            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPosition.x, currentPosition.y + 1)));
+        if (currentIndex.y < PlatesSpawner.Instance.gridSize.y - 1)
+            platesFromDestroy.Add(FindPlate(new Vector2Int(currentIndex.x, currentIndex.y + 1)));
 
-        if (currentPosition.y > 0)
-            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPosition.x, currentPosition.y - 1)));
+        if (currentIndex.y > 0)
+            platesFromDestroy.Add(FindPlate(new Vector2Int(currentIndex.x, currentIndex.y - 1)));
         
-        if (currentPosition.x < PlatesSpawner.Instance.gridSize.x - 1)
-            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPosition.x + 1, currentPosition.y)));
+        if (currentIndex.x < PlatesSpawner.Instance.gridSize.x - 1)
+            platesFromDestroy.Add(FindPlate(new Vector2Int(currentIndex.x + 1, currentIndex.y)));
 
-        if (currentPosition.x > 0)
-            platesFromDestroy.Add(FindPlate(new Vector2Int(currentPosition.x - 1, currentPosition.y)));
+        if (currentIndex.x > 0)
+            platesFromDestroy.Add(FindPlate(new Vector2Int(currentIndex.x - 1, currentIndex.y)));
 
         isUsed = true;
-        isSolo = true;
-
+        
         foreach (var plate in platesFromDestroy)
         {
             if (plate != null)
@@ -64,8 +53,6 @@ public class ExplosivePlate : Plate
                 plate.CheckForContinuation();
             }
         }
-
-        //explosiveInstruction = null;
     }
 
     public override void CheckForContinuation()

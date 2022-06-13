@@ -10,7 +10,7 @@ public class PlatesSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> platePrefab;
     [SerializeField] private GameObject firstPlatesParent;
     [SerializeField] private GameObject secondPlatesParent;
-    [SerializeField] private GameObject currentTopParent;
+    [SerializeField] public GameObject currentTopParent;
 
     [SerializeField] private int generalValue = 0;
 
@@ -23,7 +23,7 @@ public class PlatesSpawner : MonoBehaviour
     public Vector2Int gridSize = new Vector2Int(5, 8);
 
     public List<Plate> currentCordPlates = new List<Plate>();
-    [SerializeField] private List<Plate> currentTopPlates = new List<Plate>();
+    [SerializeField] public List<Plate> currentTopPlates = new List<Plate>();
     [SerializeField] private List<Plate> firstContainerElements = new List<Plate>();
     [SerializeField] private List<Plate> secondContainerElements = new List<Plate>();
 
@@ -32,8 +32,6 @@ public class PlatesSpawner : MonoBehaviour
 
     private Vector2Int grid = new Vector2Int(0, 0);
 
-
-    
     private void Awake()
     {
         Instance = this;
@@ -82,7 +80,7 @@ public class PlatesSpawner : MonoBehaviour
         }
 
         //  grid
-        plateComponent.currentPosition = grid;
+        plateComponent.currentIndex = grid;
 
         plateComponent.SetNewNonZeroValue(generalValue);
         CalculateNewPlatePosition();

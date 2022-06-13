@@ -8,12 +8,8 @@ public class Plate : MonoBehaviour
 {
     [Header("DATA Settings")]
     public int valueToDestroy;
-    public Vector2Int currentPosition;
+    public Vector2Int currentIndex;
 
-    [Header("Connect Settings")]
-    public bool isSolo = true;
-    //public ExplosivePlate explosiveInstruction;
-    
     [Header("View Settings")]
     [SerializeField] private TextMeshPro valueText;
     [SerializeField] private MeshRenderer meshRenderer;
@@ -32,18 +28,12 @@ public class Plate : MonoBehaviour
 
     protected virtual void OnMouseDown()
     {
-        if (isSolo == false)
-            return;
-
         TakeDamage(1);
     }
 
     protected virtual void OnMouseEnter()
     {
         if (Knife.knife.readyToUse == false)
-            return;
-
-        if (isSolo == false)
             return;
 
         TakeDamage(1);
@@ -73,7 +63,7 @@ public class Plate : MonoBehaviour
         }
     }
 
-    private void UpdateTextValue()
+    public void UpdateTextValue()
     {
         valueText.text = valueToDestroy.ToString();
     }

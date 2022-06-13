@@ -26,8 +26,9 @@ public class Knife : MonoBehaviour
     public void Awake()
     {
         knife = this;
-        CheckState();
-        CheckButtonState();
+        CheckState(); 
+        
+        AddFillPoint(0);
     }
     
     [ContextMenu("Check State")]
@@ -41,29 +42,26 @@ public class Knife : MonoBehaviour
 
     public void AddFillPoint(int value)
     {
-        if (!isOpen && readyToUse)
+        if (!isOpen && currentCoroutine != null)
+        {
+            useKnifeButton.interactable = false;
             return;
+        }
 
         currentPoints += value;
         currentPoints = Mathf.Clamp(currentPoints, 0, capacityPoints);
 
-        CheckButtonState();
-    }
-
-    private  void CheckButtonState()
-    {
-        if (currentPoints == capacityPoints)
-            useKnifeButton.interactable = true;
-        else
-            useKnifeButton.interactable = false;
-
         float coefficient = 1f / capacityPoints;
         fillImage.fillAmount = coefficient * currentPoints;
+        
+        if (currentPoints == capacityPoints)
+            useKnifeButton.interactable = true;
     }
 
     public void UseKnife()
     {
-        currentCoroutine = StartCoroutine(UsingKnife(knifeDuration));
+        currentCoroutine = StartCoroutine(UsingKnife(knifeDuration)); 
+        useKnifeButton.interactable = false;
     }
 
     private IEnumerator UsingKnife(float time)
@@ -84,13 +82,11 @@ public class Knife : MonoBehaviour
             if (currentTime <= 0)
                 timerRinning = true;
         }
-
-        yield return new WaitForSeconds(time);
         
         readyToUse = false;
         currentPoints = 0;
         currentCoroutine = null;
 
-        CheckButtonState();
+        useKnifeButton.interactable = false;
     }
 }
