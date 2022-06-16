@@ -38,13 +38,17 @@ public class Knife : MonoBehaviour
             knifeGroup.SetActive(true);
         else
             knifeGroup.SetActive(false);
+
+        if (currentPoints == capacityPoints)
+            useKnifeButton.interactable = true;
+        else
+            useKnifeButton.interactable = false;
     }
 
     public void AddFillPoint(int value)
     {
-        if (!isOpen && currentCoroutine != null)
+        if (!isOpen || currentCoroutine != null)
         {
-            useKnifeButton.interactable = false;
             return;
         }
 
@@ -53,9 +57,10 @@ public class Knife : MonoBehaviour
 
         float coefficient = 1f / capacityPoints;
         fillImage.fillAmount = coefficient * currentPoints;
-        
-        if (currentPoints == capacityPoints)
-            useKnifeButton.interactable = true;
+
+        CheckState();
+        //if (currentPoints == capacityPoints)
+        //    useKnifeButton.interactable = true;
     }
 
     public void UseKnife()
@@ -67,6 +72,7 @@ public class Knife : MonoBehaviour
     private IEnumerator UsingKnife(float time)
     {
         readyToUse = true;
+        useKnifeButton.interactable = false;
 
         bool timerRinning = false;
         float currentTime = time;
@@ -86,7 +92,5 @@ public class Knife : MonoBehaviour
         readyToUse = false;
         currentPoints = 0;
         currentCoroutine = null;
-
-        useKnifeButton.interactable = false;
     }
 }

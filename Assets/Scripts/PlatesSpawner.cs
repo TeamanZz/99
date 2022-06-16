@@ -120,6 +120,7 @@ public class PlatesSpawner : MonoBehaviour
                 Transform topParentChild = currentTopParent.transform.GetChild(i);
                 topParentChild.DOShakeScale(1, 0.1f, 10, 30, true).SetEase(Ease.InOutBack);
                 topParentChild.GetComponent<BoxCollider>().enabled = true;
+                topParentChild.GetComponent<Plate>().plateIsActive = true;
             }
         }
     }
@@ -213,6 +214,7 @@ public class PlatesSpawner : MonoBehaviour
         {
             SpawnPlatesFieldByGeneralValue();
             firstPlatesParent.transform.GetChild(i).GetComponent<BoxCollider>().enabled = true;
+            firstPlatesParent.transform.GetChild(i).GetComponent<Plate>().plateIsActive = true;
         }
 
         currentTopPlates = firstContainerElements;

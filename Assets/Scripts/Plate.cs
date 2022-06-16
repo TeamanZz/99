@@ -17,6 +17,7 @@ public class Plate : MonoBehaviour
     [SerializeField] private GameObject hitParticles;
     [SerializeField] private GameObject explodeParticles;
 
+    public bool plateIsActive = false;
     public void SetNewNonZeroValue(int newValue = 1)
     {
         int newValueRand = Random.Range(1, newValue + 1);
@@ -28,11 +29,17 @@ public class Plate : MonoBehaviour
 
     protected virtual void OnMouseDown()
     {
+        if (plateIsActive == false)
+            return;
+
         TakeDamage(1);
     }
 
     protected virtual void OnMouseEnter()
     {
+        if (plateIsActive == false)
+            return;
+
         if (Knife.knife.readyToUse == false)
             return;
 

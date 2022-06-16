@@ -38,6 +38,7 @@ public class ArmorPlate : Plate
 
         PlatesSpawner.Instance.currentTopPlates.Add(newPlate);
         newPlate.GetComponent<BoxCollider>().enabled = true;
+        newPlate.plateIsActive = true;
 
         newPlate.SetNewNonZeroValue(saveValue);
     }
