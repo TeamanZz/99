@@ -11,7 +11,7 @@ public class Plate : MonoBehaviour
     public Vector2Int currentIndex;
 
     [Header("View Settings")]
-    [SerializeField] private TextMeshPro valueText;
+    public TextMeshPro valueText;
     [SerializeField] private MeshRenderer meshRenderer;
 
     [SerializeField] private GameObject hitParticles;

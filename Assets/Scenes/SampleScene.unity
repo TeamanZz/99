@@ -976,6 +976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1608180904}
+  - component: {fileID: 1608180908}
   - component: {fileID: 1608180905}
   - component: {fileID: 1608180906}
   - component: {fileID: 1608180907}
@@ -1012,9 +1013,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23b5e777cdd3af4da7ff00f805b5304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1808090806}
   platePrefab:
   - {fileID: 4646713599037257294, guid: a2d1a7f66a53c2a4b862963c89651159, type: 3}
   - {fileID: 4646713599037257294, guid: 77f28f50fa396fa4cbd7654b994ccc25, type: 3}
+  - {fileID: 4646713599037257294, guid: 0c112ea883e02154eb6bedb58a380793, type: 3}
+  - {fileID: 4646713599037257294, guid: 394231102b4f4524c88008fd597b6cbc, type: 3}
+  - {fileID: 4646713599037257294, guid: 26fba5c7c1cffcf488c97ea8552a89db, type: 3}
   firstPlatesParent: {fileID: 1593706837}
   secondPlatesParent: {fileID: 1489199192}
   currentTopParent: {fileID: 0}
@@ -1027,6 +1032,9 @@ MonoBehaviour:
   currentTopPlates: []
   firstContainerElements: []
   secondContainerElements: []
+  currentRemoteController: []
+  currentReceiver: []
+  selectedPlatesManager: {fileID: 1608180908}
 --- !u!114 &1608180906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,6 +1080,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202a1cc979279ba4b935f3546019f889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1608180908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608180903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab88dae2b80ea4344b649486ec024ea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platesSpawner: {fileID: 1608180905}
+  selectedPlates: []
 --- !u!1 &1610323024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,6 +1349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1808090805}
+  - component: {fileID: 1808090806}
   - component: {fileID: 1808090804}
   m_Layer: 0
   m_Name: Others System
@@ -1369,6 +1392,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1808090806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808090803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692f4bcf83ee70147b15bbf5a20a071a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 1608180905}
 --- !u!1 &2077694945
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,8 +5,11 @@ using DG.Tweening;
 
 public class PlatesSpawner : MonoBehaviour
 {
+    [Header("Connect Settings")]
     public static PlatesSpawner Instance;
+    public LevelManager levelManager;
 
+    [Header("INstatiate Settings")]
     [SerializeField] private List<GameObject> platePrefab;
     [SerializeField] private GameObject firstPlatesParent;
     [SerializeField] private GameObject secondPlatesParent;
@@ -31,6 +34,10 @@ public class PlatesSpawner : MonoBehaviour
     private float lastPlateZPos;
 
     private Vector2Int grid = new Vector2Int(0, 0);
+
+    [Header("Plates Settings")]
+    public List<SelectedPlate> currentRemoteController = new List<SelectedPlate>();
+    public List<SelectedPlate> currentReceiver = new List<SelectedPlate>();
 
     private void Awake()
     {
@@ -108,9 +115,12 @@ public class PlatesSpawner : MonoBehaviour
     {
         for (int i = 0; i < 40; i++)
         {
-            Transform topParentChild = currentTopParent.transform.GetChild(i);
-            topParentChild.DOShakeScale(1, 0.1f, 10, 30, true).SetEase(Ease.InOutBack);
-            topParentChild.GetComponent<BoxCollider>().enabled = true;
+            if (currentTopParent.transform.GetChild(i) != null)
+            {
+                Transform topParentChild = currentTopParent.transform.GetChild(i);
+                topParentChild.DOShakeScale(1, 0.1f, 10, 30, true).SetEase(Ease.InOutBack);
+                topParentChild.GetComponent<BoxCollider>().enabled = true;
+            }
         }
     }
 
@@ -134,11 +144,11 @@ public class PlatesSpawner : MonoBehaviour
     [ContextMenu("Destroy random")]
     public void DestroyRandomPlate()
     {
-        Vector2Int position = new Vector2Int(Random.Range(0, gridSize.x - 1), Random.Range(0, gridSize.y -1));
+        Vector2Int position = new Vector2Int(Random.Range(0, gridSize.x - 1), Random.Range(0, gridSize.y - 1));
         int number = position.x * 5 + position.y + 1;
         Debug.Log(currentCordPlates[number]);
-            
-        if(currentCordPlates[number].gameObject != null)
+
+        if (currentCordPlates[number].gameObject != null)
             Destroy(currentCordPlates[number].gameObject);
     }
 
@@ -158,6 +168,8 @@ public class PlatesSpawner : MonoBehaviour
         }
 
         currentCordPlates.AddRange(currentTopPlates);
+
+        //selectedPlatesManager.FindElements(currentTopPlates);
     }
 
     private IEnumerator SpawnPlatesAfterDelay()
@@ -193,6 +205,7 @@ public class PlatesSpawner : MonoBehaviour
         }
     }
 
+    public SelectedPlatesManager selectedPlatesManager;
     private void SpawnStartPlates()
     {
         ResetLastSpawnPoints();
@@ -201,13 +214,14 @@ public class PlatesSpawner : MonoBehaviour
             SpawnPlatesFieldByGeneralValue();
             firstPlatesParent.transform.GetChild(i).GetComponent<BoxCollider>().enabled = true;
         }
+
         currentTopPlates = firstContainerElements;
         currentCordPlates.AddRange(currentTopPlates);
 
+        //selectedPlatesManager.FindElements(currentTopPlates);
+
         needSpawnToFirstParent = !needSpawnToFirstParent;
-
         SpawnNewPlatesField();
-
         currentTopParent = firstPlatesParent;
     }
 }
