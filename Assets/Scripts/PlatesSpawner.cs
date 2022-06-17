@@ -10,10 +10,10 @@ public class PlatesSpawner : MonoBehaviour
     public LevelManager levelManager;
 
     [Header("INstatiate Settings")]
-    [SerializeField] private List<GameObject> platePrefab;
+    public List<GameObject> platePrefab;
     [SerializeField] private GameObject firstPlatesParent;
-    [SerializeField] private GameObject secondPlatesParent;
-    [SerializeField] public GameObject currentTopParent;
+    [SerializeField]  private GameObject secondPlatesParent;
+    public GameObject currentTopParent;
 
     [SerializeField] private int generalValue = 0;
 
@@ -68,7 +68,12 @@ public class PlatesSpawner : MonoBehaviour
         Vector3 newPlatePosition = new Vector3(lastPlateXPos, 0, lastPlateZPos);
 
         int number = Random.Range(-8, platePrefab.Count + 1);
-        number = Mathf.Clamp(number, 0, platePrefab.Count - 1);
+        if (platePrefab.Count > 1)
+        {
+            number = Mathf.Clamp(number, 0, platePrefab.Count - 1);
+        }
+        else
+            number = 0;
         Debug.Log("Number " + number);
 
         if (needSpawnToFirstParent)

@@ -23,7 +23,6 @@ public class WoodPlate : Plate
         newPlate.plateIsActive = true;
 
         newPlate.SetNewNonZeroValue(saveValue);
-
         KillPlate();
     }
 }
