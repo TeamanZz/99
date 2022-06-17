@@ -49,6 +49,10 @@ public class Plate : MonoBehaviour
     public bool TakeDamage(int damageValue)
     {
         valueToDestroy -= damageValue;
+
+        if (InfoController.infoController != null)
+            InfoController.infoController.touches += damageValue;
+
         if (Knife.knife.isOpen)
             Knife.knife.AddFillPoint(damageValue);
 
