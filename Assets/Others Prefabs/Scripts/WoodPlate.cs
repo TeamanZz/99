@@ -10,7 +10,8 @@ public class WoodPlate : Plate
 
     public void Start()
     {
-        saveValue = base.valueToDestroy;
+        saveValue = base.valueToDestroy; 
+        base.valueToDestroy = 9999;
     }
 
     public void DestroyWoodPlate()

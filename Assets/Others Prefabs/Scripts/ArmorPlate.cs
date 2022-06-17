@@ -35,7 +35,6 @@ public class ArmorPlate : Plate
     {
         Plate newPlate = Instantiate(platePrefab, transform.position, Quaternion.Euler(270, 0, 0), PlatesSpawner.Instance.currentTopParent.transform);
         newPlate.currentIndex = base.currentIndex;
-
         PlatesSpawner.Instance.currentTopPlates.Add(newPlate);
         newPlate.GetComponent<BoxCollider>().enabled = true;
         newPlate.plateIsActive = true;

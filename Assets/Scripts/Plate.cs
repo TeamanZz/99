@@ -60,7 +60,7 @@ public class Plate : MonoBehaviour
         if (CheckOnZeroValue())
         {
             CheckAdjacentPlates();
-            KillPlate();
+            Invoke("KillPlate", 0.01f);
             return true;
         }
         else
