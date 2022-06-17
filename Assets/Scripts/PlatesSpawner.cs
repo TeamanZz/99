@@ -15,7 +15,7 @@ public class PlatesSpawner : MonoBehaviour
     [SerializeField]  private GameObject secondPlatesParent;
     public GameObject currentTopParent;
 
-    [SerializeField] private int generalValue = 0;
+    //[SerializeField] private int generalValue = 0;
 
     [SerializeField] private float startPlateXPos;
     [SerializeField] private float startPlateZPos;
@@ -44,14 +44,18 @@ public class PlatesSpawner : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    public void StartWorking()
     {
         SpawnStartPlates();
     }
 
     public void SpawnNewPlatesField()
     {
-        generalValue++;
+        levelManager.AddLevel();
+        //levelManager.currentLevel++;
+        //levelManager.SaveLevel();
+
+        //generalValue++;
         ResetLastSpawnPoints();
         for (var i = 0; i < 40; i++)
         {
@@ -94,7 +98,8 @@ public class PlatesSpawner : MonoBehaviour
         //  grid
         plateComponent.currentIndex = grid;
 
-        plateComponent.SetNewNonZeroValue(generalValue);
+        plateComponent.SetNewNonZeroValue(levelManager.currentLevel);
+        //plateComponent.SetNewNonZeroValue(generalValue);
         CalculateNewPlatePosition();
     }
 
