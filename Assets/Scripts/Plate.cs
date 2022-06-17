@@ -59,6 +59,7 @@ public class Plate : MonoBehaviour
 
         if (CheckOnZeroValue())
         {
+            CheckAdjacentPlates();
             KillPlate();
             return true;
         }
@@ -77,7 +78,63 @@ public class Plate : MonoBehaviour
 
     public virtual void CheckForContinuation()
     {
+        CheckAdjacentPlates();
         KillPlate();
+    }
+
+    public List<WoodPlate> adjacentWoodPlates = new List<WoodPlate>();
+    public void CheckAdjacentPlates()
+    {
+        adjacentWoodPlates.Clear();
+        if (currentIndex.y < PlatesSpawner.Instance.gridSize.y - 1)
+            adjacentWoodPlates.Add(FindPlate(new Vector2Int(currentIndex.x, currentIndex.y + 1)));
+
+        if (currentIndex.y > 0)
+            adjacentWoodPlates.Add(FindPlate(new Vector2Int(currentIndex.x, currentIndex.y - 1)));
+
+        if (currentIndex.x < PlatesSpawner.Instance.gridSize.x - 1)
+            adjacentWoodPlates.Add(FindPlate(new Vector2Int(currentIndex.x + 1, currentIndex.y)));
+
+        if (currentIndex.x > 0)
+            adjacentWoodPlates.Add(FindPlate(new Vector2Int(currentIndex.x - 1, currentIndex.y)));
+
+        //ClearWoodList();
+
+        foreach (var plate in adjacentWoodPlates)
+        {
+            if (plate != null)
+            {
+                plate.DestroyWoodPlate();
+                //plate.KillPlate();
+            }
+        }
+    }
+
+    public void ClearWoodList()
+    {
+        foreach (var plate in adjacentWoodPlates)
+        {
+            if (plate == null)
+                adjacentWoodPlates.Remove(plate);
+        }
+    }
+
+    public WoodPlate FindPlate(Vector2Int position)
+    {
+        int newPosition = position.x + position.y * 5;
+        Debug.Log("Position = " + newPosition);
+
+        if (PlatesSpawner.Instance.currentCordPlates[newPosition] != null)
+        {
+            WoodPlate currentWoodPlate = PlatesSpawner.Instance.currentCordPlates[newPosition].GetComponent<WoodPlate>();
+            
+            if (currentWoodPlate != null)
+                return currentWoodPlate;
+            else
+                return null;
+        }
+        else
+            return null;
     }
 
     public void KillPlate()

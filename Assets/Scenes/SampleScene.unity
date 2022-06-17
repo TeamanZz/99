@@ -1033,6 +1033,7 @@ MonoBehaviour:
   - {fileID: 4646713599037257294, guid: 77f28f50fa396fa4cbd7654b994ccc25, type: 3}
   - {fileID: 4646713599037257294, guid: 0c112ea883e02154eb6bedb58a380793, type: 3}
   - {fileID: 4646713599037257294, guid: 26fba5c7c1cffcf488c97ea8552a89db, type: 3}
+  - {fileID: 4646713599037257294, guid: 27cfd0f59b4402a40b6aeb8d1229ea8c, type: 3}
   firstPlatesParent: {fileID: 1593706837}
   secondPlatesParent: {fileID: 1489199192}
   currentTopParent: {fileID: 0}
@@ -1388,7 +1389,7 @@ MonoBehaviour:
   isOpen: 1
   knifeGroup: {fileID: 2100252203}
   capacityPoints: 25
-  currentPoints: 0
+  currentPoints: 25
   readyToUse: 0
   knifeDuration: 5
 --- !u!4 &1808090805
