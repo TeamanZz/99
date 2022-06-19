@@ -59,8 +59,8 @@ public class LevelManager : MonoBehaviour
         leftBarText.text = currentLevel.ToString();
         rightBarText.text = (currentLevel + 1).ToString();
         float coefficient = 1f / 40;
-        int fillCount = 40 - spawner.currentTopPlates.Count;
-        levelFillImage.fillAmount = coefficient * fillCount;
+        int fillCount = 40 - spawner.currentTopPlates.Count; 
+        levelFillImage.DOFillAmount(coefficient * fillCount, 0.1f);
     }
 
     private void SaveLevel()
