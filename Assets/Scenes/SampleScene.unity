@@ -2806,7 +2806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 2392142030448974975}
   useKnifeButton: {fileID: 1772411739}
-  isOpen: 1
+  isOpen: 0
   knifeGroup: {fileID: 2392142031209983829}
   capacityPoints: 25
   currentPoints: 25
