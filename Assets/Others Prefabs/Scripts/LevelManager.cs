@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class LevelManager : MonoBehaviour
 {
@@ -10,12 +12,16 @@ public class LevelManager : MonoBehaviour
 
     [Header("Prefabs Settings")]
     public List<Plate> platesPrefabs = new List<Plate>();
+    public List<int> platesLevels = new List<int>();
 
     [Header("Levels Manager")]
     public int currentLevel;
 
     [Header("View Settings")]
-    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI leftBarText;
+    public TextMeshProUGUI rightBarText;
+    public Image levelFillImage;
+
 
     private void Awake()
     {
@@ -28,12 +34,12 @@ public class LevelManager : MonoBehaviour
         if (currentLevel >= 3)
             AddPlate();
 
-        if (levelText != null)
-            levelText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
+        if (leftBarText != null)
+            leftBarText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
 
         if (currentLevel >= 8)
         {
-            Knife.knife.isOpen = true; 
+            Knife.knife.isOpen = true;
             Knife.knife.CheckState();
         }
 
@@ -45,6 +51,16 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevel >= 20)
             AddPlate();
+    }
+
+
+    public void UpdateBottomBar()
+    {
+        leftBarText.text = currentLevel.ToString();
+        rightBarText.text = (currentLevel + 1).ToString();
+        float coefficient = 1f / 40;
+        int fillCount = 40 - spawner.currentTopPlates.Count;
+        levelFillImage.fillAmount = coefficient * fillCount;
     }
 
     private void SaveLevel()
@@ -66,16 +82,18 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        spawner.StartWorking();    
+        spawner.StartWorking();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1) && platesPrefabs.Count > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && platesPrefabs.Count > 0)
         {
             Debug.Log("Add Plate");
             AddPlate();
         }
+
+        UpdateBottomBar();
     }
 
     public void AddLevel()
@@ -83,8 +101,8 @@ public class LevelManager : MonoBehaviour
         currentLevel++;
         SaveLevel();
 
-        if (levelText != null) 
-            levelText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
+        if (leftBarText != null)
+            leftBarText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
 
         if (currentLevel == 3)
             AddPlate();
