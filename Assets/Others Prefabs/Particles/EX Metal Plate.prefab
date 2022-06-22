@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 19983730}
   - component: {fileID: 8285908}
   m_Layer: 0
-  m_Name: Explosion Plate
+  m_Name: EX Metal Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4835,7 +4835,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7fb954e1c1961644d85f884b946f53b0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d71dce19daaa7914b974254e6aad9fab, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1.2
