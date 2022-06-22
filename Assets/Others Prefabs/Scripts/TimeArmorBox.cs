@@ -22,13 +22,14 @@ public class TimeArmorBox : Plate
     [ContextMenu("Debug Rotation")]
     public void DebugRotate()
     {
-        mainCollider.enabled = false;
+        //mainCollider.enabled = false;
         mainObject.transform.DOLocalRotate(debugRotation, ratationTime, RotateMode.Fast);
     }
 
     public IEnumerator StartProtection()
     {
-        mainCollider.enabled = false;
+        //mainCollider.enabled = false;
+        plateIsActive = false;
         mainObject.transform.DOLocalRotate(new Vector3(0, 90, -180f), ratationTime, RotateMode.Fast);
 
         yield return new WaitForSeconds(timeToProtection);
@@ -38,7 +39,8 @@ public class TimeArmorBox : Plate
     public IEnumerator StopProtection()
     {
         mainObject.transform.DOLocalRotate(new Vector3(0, 0, -180f), ratationTime, RotateMode.Fast);
-        mainCollider.enabled = true;
+        plateIsActive = true;
+        //mainCollider.enabled = true;
 
         yield return new WaitForSeconds(timeToProtection);
         StartCoroutine(StartProtection());
