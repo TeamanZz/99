@@ -10,6 +10,7 @@ public class Plate : MonoBehaviour
     public int valueToDestroy;
     public Vector2Int currentIndex;
 
+    [Space(10)]
     [Header("View Settings")]
     public TextMeshPro valueText;
     [SerializeField] private MeshRenderer meshRenderer;
@@ -18,6 +19,12 @@ public class Plate : MonoBehaviour
     [SerializeField] private GameObject explodeParticles;
 
     public bool plateIsActive = false;
+
+    [Space(10)]
+    [Header("Sound Settings")]
+    public int damageSoundID = 0;
+    public int destroySoundID = 0;
+
     public void SetNewNonZeroValue(int newValue = 1)
     {
         int newValueRand = Random.Range(1, newValue + 1);
@@ -59,7 +66,7 @@ public class Plate : MonoBehaviour
         ShakePlate();
         var newParticles = Instantiate(hitParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
 
-        SFX.Instance.PlaySound(0);
+        SFX.Instance.PlayDamageSound(damageSoundID);
 
         if (CheckOnZeroValue())
         {
@@ -75,18 +82,18 @@ public class Plate : MonoBehaviour
         }
     }
 
-    public void UpdateTextValue()
-    {
-        valueText.text = valueToDestroy.ToString();
-    }
-
     public virtual void CheckForContinuation()
     {
         CheckAdjacentPlates();
         KillPlate();
     }
+    
+    public void UpdateTextValue()
+    {
+        valueText.text = valueToDestroy.ToString();
+    }
 
-    public List<WoodPlate> adjacentWoodPlates = new List<WoodPlate>();
+    private List<WoodPlate> adjacentWoodPlates = new List<WoodPlate>();
     public void CheckAdjacentPlates()
     {
         adjacentWoodPlates.Clear();
@@ -146,7 +153,7 @@ public class Plate : MonoBehaviour
         valueToDestroy = 0;
         var newParticles = Instantiate(explodeParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
         SetDefaultColor();
-        SFX.Instance.PlayPlateDestroySound();
+        SFX.Instance.PlayDestroySound(destroySoundID);
         ShakePlate();
         DisableText();
 

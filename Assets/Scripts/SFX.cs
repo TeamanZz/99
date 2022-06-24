@@ -6,8 +6,8 @@ public class SFX : MonoBehaviour
 {
     public static SFX Instance;
 
-    public List<AudioClip> soundsList = new List<AudioClip>();
-    public List<AudioClip> soundsBlockDestroyList = new List<AudioClip>();
+    public List<AudioClip> damageSoundList = new List<AudioClip>();
+    public List<AudioClip> destroySoundList = new List<AudioClip>();
     private AudioSource source;
 
     private void Awake()
@@ -16,13 +16,27 @@ public class SFX : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
-    public void PlaySound(int index)
+    public void PlayDamageSound(int index)
     {
-        source.PlayOneShot(soundsList[index]);
+        if (index > damageSoundList.Count || damageSoundList.Count == 0 || damageSoundList[index] == null)
+        {
+            Debug.LogError($"Index {index} Not Found");
+            return;
+        }
+
+        Debug.Log($"Damage Sound Index {index}");
+        
+        source.PlayOneShot(damageSoundList[index]);
     }
 
-    public void PlayPlateDestroySound()
+    public void PlayDestroySound(int index)
     {
-        source.PlayOneShot(soundsBlockDestroyList[Random.Range(0, soundsBlockDestroyList.Count)]);
+        if (index > destroySoundList.Count || destroySoundList.Count == 0 || destroySoundList[index] == null)
+        {
+            Debug.Log($"Index {index} Not Found");
+            return;
+        }
+
+        source.PlayOneShot(destroySoundList[index]);
     }
 }

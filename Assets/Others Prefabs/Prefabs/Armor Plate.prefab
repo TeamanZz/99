@@ -318,7 +318,8 @@ MonoBehaviour:
   hitParticles: {fileID: 127072, guid: 7f45705f5f30d8a45af0fc2eb8c8998a, type: 3}
   explodeParticles: {fileID: 130848, guid: d7dc18be2c068064fb2a671763bdeb79, type: 3}
   plateIsActive: 0
-  adjacentWoodPlates: []
+  damageSoundID: 1
+  destroySoundID: 1
   saveValue: 0
   platePrefab: {fileID: 3725058296081796022, guid: a2d1a7f66a53c2a4b862963c89651159, type: 3}
 --- !u!1001 &6303729661858927352

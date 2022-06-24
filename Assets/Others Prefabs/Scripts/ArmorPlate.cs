@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ArmorPlate : Plate
 {
+    [Space(10)]
+    [Header("Armor Settings")]
     public int saveValue;
     public Plate platePrefab;
 
