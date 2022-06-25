@@ -25,10 +25,25 @@ public class TimeArmorBox : Plate
 
         if(plateIsActive == false)
         {
-            SFX.Instance.PlayDamageSound(nullDamageSoundID);
+            SFX.Instance.PlayNonDamageSound(nullDamageSoundID);
+
+            if (PitchManager.pitchManager != null)
+                PitchManager.pitchManager.IndexReset();
         }
     }
-    
+    protected override void OnMouseEnter()
+    {
+        base.OnMouseEnter();
+
+        if (plateIsActive == false)
+        {
+            SFX.Instance.PlayNonDamageSound(nullDamageSoundID);
+
+            if (PitchManager.pitchManager != null)
+                PitchManager.pitchManager.IndexReset();
+        }
+    }
+
     [ContextMenu("Debug Rotation")]
     public void DebugRotate()
     {

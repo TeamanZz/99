@@ -11,8 +11,27 @@ public class WoodPlate : Plate
 
     public void Start()
     {
-        saveValue = base.valueToDestroy; 
+        saveValue = base.valueToDestroy;
         base.valueToDestroy = 9999;
+    }
+
+    protected override void OnMouseDown()
+    {
+        SFX.Instance.PlayNonDamageSound(nullDamageSoundID);
+
+        if (PitchManager.pitchManager != null)
+            PitchManager.pitchManager.IndexReset();
+    }
+
+    protected override void OnMouseEnter()
+    {
+        if (Knife.knife.readyToUse == false)
+            return;
+
+        SFX.Instance.PlayNonDamageSound(nullDamageSoundID);
+
+        if (PitchManager.pitchManager != null)
+            PitchManager.pitchManager.IndexReset();
     }
 
     public void DestroyWoodPlate()

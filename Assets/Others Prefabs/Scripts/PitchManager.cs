@@ -29,9 +29,7 @@ public class PitchManager : MonoBehaviour
             sfx.source.pitch = minPitch;
         }
         else
-        {
-            sfx.source.pitch += pitchCoefficient;
-        }
+            sfx.source.pitch = Mathf.Clamp(sfx.source.pitch + pitchCoefficient, minPitch, maxPitch);
     }
 
     public void IndexReset()
