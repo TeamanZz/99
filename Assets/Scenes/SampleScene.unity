@@ -2540,7 +2540,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1608180904}
-  - component: {fileID: 1608180908}
   - component: {fileID: 1608180905}
   - component: {fileID: 1608180906}
   - component: {fileID: 1608180907}
@@ -2593,7 +2592,7 @@ MonoBehaviour:
   secondContainerElements: []
   currentRemoteController: []
   currentReceiver: []
-  selectedPlatesManager: {fileID: 1608180908}
+  selectedPlatesManager: {fileID: 0}
 --- !u!114 &1608180906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2639,20 +2638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202a1cc979279ba4b935f3546019f889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1608180908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1608180903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab88dae2b80ea4344b649486ec024ea2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platesSpawner: {fileID: 1608180905}
-  selectedPlates: []
 --- !u!1 &1609520740
 GameObject:
   m_ObjectHideFlags: 0
@@ -2986,9 +2971,13 @@ MonoBehaviour:
   damageSoundList:
   - {fileID: 8300000, guid: 0219e52ad5dc12d45bada8681990c061, type: 3}
   - {fileID: 8300000, guid: ba1f07e0932d5e947a8c7c3a137984e1, type: 3}
+  - {fileID: 8300000, guid: 9092be51be531f74ab49cc62ff4185cf, type: 3}
+  - {fileID: 8300000, guid: 120de5fb057b54340967e065a857f05f, type: 3}
   destroySoundList:
   - {fileID: 8300000, guid: dd6b300e5ac49ec49a67a6cdf7117248, type: 3}
   - {fileID: 8300000, guid: aa93ffb059d3e28479dcb47ba3ac8bac, type: 3}
+  - {fileID: 8300000, guid: 56a36ebf76dd5c1418f8205ae89e47bd, type: 3}
+  - {fileID: 8300000, guid: 92bb992f3871c01458adb7138fef3122, type: 3}
 --- !u!82 &1661442887
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3288,7 +3277,7 @@ MonoBehaviour:
   - {fileID: 560029952971484664, guid: 26fba5c7c1cffcf488c97ea8552a89db, type: 3}
   - {fileID: 833603762797520731, guid: 27cfd0f59b4402a40b6aeb8d1229ea8c, type: 3}
   platesLevels: 
-  currentLevel: 0
+  currentLevel: 99
   leftBarText: {fileID: 921693838}
   rightBarText: {fileID: 11588582}
   levelFillImage: {fileID: 2074666186}

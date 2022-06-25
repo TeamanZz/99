@@ -56,8 +56,8 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateBottomBar()
     {
-        leftBarText.text = currentLevel.ToString();
-        rightBarText.text = (currentLevel + 1).ToString();
+        leftBarText.text = (currentLevel - 1).ToString();
+        rightBarText.text = (currentLevel).ToString();
         float coefficient = 1f / 40;
         int fillCount = 40 - spawner.currentTopPlates.Count; 
         levelFillImage.DOFillAmount(coefficient * fillCount, 0.1f);
@@ -77,7 +77,7 @@ public class LevelManager : MonoBehaviour
     [ContextMenu("Remove Level")]
     public void RemoveLevel()
     {
-        PlayerPrefs.SetInt("currentLevel", 1);
+        PlayerPrefs.SetInt("currentLevel", 2);
     }
 
     private void Start()

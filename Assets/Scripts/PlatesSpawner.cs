@@ -78,6 +78,7 @@ public class PlatesSpawner : MonoBehaviour
         }
         else
             number = 0;
+
         Debug.Log("Number " + number);
 
         if (needSpawnToFirstParent)
@@ -98,6 +99,7 @@ public class PlatesSpawner : MonoBehaviour
         //  grid
         plateComponent.currentIndex = grid;
 
+        Debug.Log($"Current Level{levelManager.currentLevel}");
         plateComponent.SetNewNonZeroValue(levelManager.currentLevel);
         //plateComponent.SetNewNonZeroValue(generalValue);
         CalculateNewPlatePosition();
@@ -108,11 +110,13 @@ public class PlatesSpawner : MonoBehaviour
         currentTopPlates.Remove(plate);
         Destroy(plate.gameObject);
 
-
         if (currentTopPlates.Count == 0)
         {
             currentCordPlates.Clear();
             currentTopPlates.Clear();
+
+            if(PitchManager.pitchManager!=null)
+                PitchManager.pitchManager.IndexReset();
 
             SwapParentsPositions();
             ReinitializeTopObjects();

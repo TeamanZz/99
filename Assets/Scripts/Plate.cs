@@ -22,6 +22,7 @@ public class Plate : MonoBehaviour
 
     [Space(10)]
     [Header("Sound Settings")]
+    public int nullDamageSoundID = 0;
     public int damageSoundID = 0;
     public int destroySoundID = 0;
 
@@ -65,6 +66,9 @@ public class Plate : MonoBehaviour
 
         ShakePlate();
         var newParticles = Instantiate(hitParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
+
+        if (PitchManager.pitchManager != null)
+            PitchManager.pitchManager.CheckPlate(currentIndex);
 
         SFX.Instance.PlayDamageSound(damageSoundID);
 

@@ -8,7 +8,7 @@ public class SFX : MonoBehaviour
 
     public List<AudioClip> damageSoundList = new List<AudioClip>();
     public List<AudioClip> destroySoundList = new List<AudioClip>();
-    private AudioSource source;
+    public AudioSource source;
 
     private void Awake()
     {

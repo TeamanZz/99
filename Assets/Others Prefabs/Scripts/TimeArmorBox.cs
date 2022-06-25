@@ -19,6 +19,16 @@ public class TimeArmorBox : Plate
         StartCoroutine(StartProtection());
     }
 
+    protected override void OnMouseDown()
+    {
+        base.OnMouseDown();
+
+        if(plateIsActive == false)
+        {
+            SFX.Instance.PlayDamageSound(nullDamageSoundID);
+        }
+    }
+    
     [ContextMenu("Debug Rotation")]
     public void DebugRotate()
     {
