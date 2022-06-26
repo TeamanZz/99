@@ -96,6 +96,11 @@ public class LevelManager : MonoBehaviour
         //UpdateBottomBar();
     }
 
+    public void InitializationBar()
+    {
+
+    }
+
     public void AddLevel()
     {
         currentLevel++;

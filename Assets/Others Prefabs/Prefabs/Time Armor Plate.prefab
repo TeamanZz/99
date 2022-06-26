@@ -403,7 +403,7 @@ MonoBehaviour:
   nullDamageSoundID: 0
   damageSoundID: 3
   destroySoundID: 3
-  mainObject: {fileID: 0}
+  mainObject: {fileID: 16505576766009763}
   timeToProtection: 1.5
   ratationTime: 0.5
   mainCollider: {fileID: -2922139130395073111}
