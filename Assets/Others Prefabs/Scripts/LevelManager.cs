@@ -72,6 +72,7 @@ public class LevelManager : MonoBehaviour
     {
         currentLevel = PlayerPrefs.GetInt("currentLevel");
         currentLevel -= 1;
+        currentLevel = Mathf.Clamp(currentLevel, 1, 999);
     }
 
     [ContextMenu("Remove Level")]
