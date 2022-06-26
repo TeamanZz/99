@@ -35,9 +35,6 @@ public class ArmorPlate : Plate
 
     public void DestroyShield()
     {
-        if (PitchManager.pitchManager != null)
-            PitchManager.pitchManager.IndexReset();
-
         Plate newPlate = Instantiate(platePrefab, transform.position, Quaternion.Euler(270, 0, 0), PlatesSpawner.Instance.currentTopParent.transform);
         newPlate.currentIndex = base.currentIndex;
 
@@ -46,5 +43,9 @@ public class ArmorPlate : Plate
         newPlate.plateIsActive = true;
 
         newPlate.SetNewNonZeroValue(saveValue);
+
+        if (PitchManager.pitchManager != null)
+            PitchManager.pitchManager.IndexReset();
+
     }
 }
