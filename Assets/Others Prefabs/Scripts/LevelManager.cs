@@ -17,10 +17,10 @@ public class LevelManager : MonoBehaviour
     [Header("Levels Manager")]
     public int currentLevel;
 
-    [Header("View Settings")]
-    public TextMeshProUGUI leftBarText;
-    public TextMeshProUGUI rightBarText;
-    public Image levelFillImage;
+    //[Header("View Bar Settings")]
+    //public TextMeshProUGUI leftBarText;
+    //public TextMeshProUGUI rightBarText;
+    //public Image levelFillImage;
 
 
     private void Awake()
@@ -34,8 +34,8 @@ public class LevelManager : MonoBehaviour
         if (currentLevel >= 3)
             AddPlate();
 
-        if (leftBarText != null)
-            leftBarText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
+        //if (leftBarText != null)
+        //    leftBarText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
 
         if (currentLevel >= 8)
         {
@@ -53,15 +53,14 @@ public class LevelManager : MonoBehaviour
             AddPlate();
     }
 
-
-    public void UpdateBottomBar()
-    {
-        leftBarText.text = (currentLevel - 1).ToString();
-        rightBarText.text = (currentLevel).ToString();
-        float coefficient = 1f / 40;
-        int fillCount = 40 - spawner.currentTopPlates.Count; 
-        levelFillImage.DOFillAmount(coefficient * fillCount, 0.1f);
-    }
+    //public void UpdateBottomBar()
+    //{
+    //    leftBarText.text = (currentLevel - 1).ToString();
+    //    rightBarText.text = (currentLevel).ToString();
+    //    float coefficient = 1f / 40;
+    //    int fillCount = 40 - spawner.currentTopPlates.Count; 
+    //    levelFillImage.DOFillAmount(coefficient * fillCount, 0.1f);
+    //}
 
     private void SaveLevel()
     {
@@ -94,7 +93,7 @@ public class LevelManager : MonoBehaviour
             AddPlate();
         }
 
-        UpdateBottomBar();
+        //UpdateBottomBar();
     }
 
     public void AddLevel()
@@ -102,8 +101,8 @@ public class LevelManager : MonoBehaviour
         currentLevel++;
         SaveLevel();
 
-        if (leftBarText != null)
-            leftBarText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
+        //if (leftBarText != null)
+        //    leftBarText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
 
         if (currentLevel == 3)
             AddPlate();
