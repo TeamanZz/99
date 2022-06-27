@@ -123,6 +123,8 @@ public class PlatesSpawner : MonoBehaviour
             HandleNewTopPlatesOnSwap();
             StartCoroutine(SpawnPlatesAfterDelay());
         }
+
+        levelManager.UpdateBottomBar();
     }
 
     private void HandleNewTopPlatesOnSwap()

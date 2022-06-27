@@ -12,12 +12,18 @@ public class LevelManager : MonoBehaviour
 
     [Header("Prefabs Settings")]
     public List<Plate> platesPrefabs = new List<Plate>();
-    public List<int> platesLevels = new List<int>();
 
     [Header("Levels Manager")]
     public int currentLevel;
 
-    //[Header("View Bar Settings")]
+    [Header("View Bar Settings")]
+    public Image fillImage;
+    public int saveIntState = 0;
+    public float coefficient;
+
+    public Vector2Int levels;
+    public TextMeshProUGUI valueText;
+
     //public TextMeshProUGUI leftBarText;
     //public TextMeshProUGUI rightBarText;
     //public Image levelFillImage;
@@ -53,18 +59,10 @@ public class LevelManager : MonoBehaviour
             AddPlate();
     }
 
-    //public void UpdateBottomBar()
-    //{
-    //    leftBarText.text = (currentLevel - 1).ToString();
-    //    rightBarText.text = (currentLevel).ToString();
-    //    float coefficient = 1f / 40;
-    //    int fillCount = 40 - spawner.currentTopPlates.Count; 
-    //    levelFillImage.DOFillAmount(coefficient * fillCount, 0.1f);
-    //}
-
     private void SaveLevel()
     {
         PlayerPrefs.SetInt("currentLevel", currentLevel);
+        PlayerPrefs.SetInt("saveIntState", saveIntState);
     }
 
     private void LoadLevel()
@@ -72,12 +70,18 @@ public class LevelManager : MonoBehaviour
         currentLevel = PlayerPrefs.GetInt("currentLevel");
         currentLevel -= 1;
         currentLevel = Mathf.Clamp(currentLevel, 1, 999);
+
+        saveIntState = PlayerPrefs.GetInt("saveIntState");
+        saveIntState -= 1;
+        
+        InitializationBar();
     }
 
     [ContextMenu("Remove Level")]
     public void RemoveLevel()
     {
         PlayerPrefs.SetInt("currentLevel", 2);
+        PlayerPrefs.SetInt("saveIntState", 0);
     }
 
     private void Start()
@@ -98,33 +102,113 @@ public class LevelManager : MonoBehaviour
 
     public void InitializationBar()
     {
+        if (currentLevel > 20)
+        {
+            fillImage.transform.parent.gameObject.SetActive(false);
+            return;
+        }
+        else
+            fillImage.transform.parent.gameObject.SetActive(true);
 
+
+        if (currentLevel < 3)
+        {
+            BarProcessing(1, 3);
+            return;
+        }
+
+        if (currentLevel - 1 < 8)
+        {
+            BarProcessing(3, 8);
+            return;
+        }
+
+        if (currentLevel - 1 < 12)
+        {
+            BarProcessing(8, 12);
+            return;
+        }
+
+        if (currentLevel - 1 < 15)
+        {
+            BarProcessing(12, 15);
+            return;
+        }
+
+        if (currentLevel - 1 < 20)
+        {
+            BarProcessing(15, 20);
+            return;
+        }
     }
 
+    public void BarProcessing(int startLevel, int endLevel)
+    {
+        levels = new Vector2Int(startLevel, endLevel);
+        Debug.Log($"Bar Levels {levels}");
+
+        coefficient = 1f / ((endLevel - startLevel) * 40);
+        fillImage.fillAmount = (saveIntState * coefficient * 40) + (40 - spawner.currentTopPlates.Count) * coefficient;
+        Debug.Log($"Bar Fill Value {fillImage.fillAmount}; Fill Coefficient {coefficient}");
+
+        valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
+    }
+
+    public void UpdateBottomBar()
+    {
+        float fillValue = (saveIntState * coefficient * 40) + (40 - spawner.currentTopPlates.Count) * coefficient;
+        fillImage.DOFillAmount(fillValue, 0.1f);
+        Debug.Log($"Bar Fill Value {fillValue}");
+
+        valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
+    }
+
+    public void CheckBarToEnd()
+    {
+        if (currentLevel - 1 < levels.y)
+            return;
+
+        Debug.Log("End Levels");
+        coefficient = 0;
+        saveIntState = 0;
+        fillImage.fillAmount = 0;
+
+        valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
+        InitializationBar();
+    }
+
+    [ContextMenu("Add Level")]
     public void AddLevel()
     {
         currentLevel++;
+
+        saveIntState++;
+
+        //BarProcessing(levels.x, levels.y);
+        CheckBarToEnd();
+        UpdateBottomBar();
+
         SaveLevel();
 
         //if (leftBarText != null)
         //    leftBarText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
 
-        if (currentLevel == 3)
+        if (currentLevel - 1 == 3)
             AddPlate();
 
-        if (currentLevel == 8)
+        if (currentLevel - 1== 8)
         {
             Knife.knife.isOpen = true;
             Knife.knife.CheckState();
         }
 
-        if (currentLevel == 12)
+        if (currentLevel - 1 == 12)
             AddPlate();
 
-        if (currentLevel == 15)
+        if (currentLevel - 1 == 15)
             AddPlate();
 
-        if (currentLevel == 20)
+        if (currentLevel - 1 == 20)
             AddPlate();
     }
 
