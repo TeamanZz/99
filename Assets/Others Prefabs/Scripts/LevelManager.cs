@@ -7,6 +7,8 @@ using DG.Tweening;
 
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager levelManager;
+    
     [Header("Conect Settings")]
     public PlatesSpawner spawner;
 
@@ -24,13 +26,14 @@ public class LevelManager : MonoBehaviour
     public Vector2Int levels;
     public TextMeshProUGUI valueText;
 
-    //public TextMeshProUGUI leftBarText;
-    //public TextMeshProUGUI rightBarText;
-    //public Image levelFillImage;
+    [Header("Main Settings")]
+    public int defaultDamage = 1;
+    public int knifeDamage = 1;
 
-
+    public int allDamageValue = 0;
     private void Awake()
     {
+        levelManager = this;
         LoadLevel();
         FirstLevelInitialization();
     }
@@ -40,15 +43,8 @@ public class LevelManager : MonoBehaviour
         if (currentLevel >= 3)
             AddPlate();
 
-        //if (leftBarText != null)
-        //    leftBarText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
-
         if (currentLevel >= 8)
-        {
             AddPlate();
-            //    Knife.knife.isOpen = true;
-            //    Knife.knife.CheckState();
-        }
 
         if (currentLevel >= 12)
             AddPlate();
@@ -97,8 +93,6 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Add Plate");
             AddPlate();
         }
-
-        //UpdateBottomBar();
     }
 
     public void InitializationBar()
@@ -185,14 +179,10 @@ public class LevelManager : MonoBehaviour
 
         saveIntState++;
 
-        //BarProcessing(levels.x, levels.y);
         CheckBarToEnd();
         UpdateBottomBar();
 
         SaveLevel();
-
-        //if (leftBarText != null)
-        //    leftBarText.text = Mathf.Clamp((currentLevel - 1), 1, 999).ToString();
 
         if (currentLevel - 1 == 3)
             AddPlate();
@@ -200,8 +190,6 @@ public class LevelManager : MonoBehaviour
         if (currentLevel - 1== 8)
         {
             AddPlate();
-            //Knife.knife.isOpen = true;
-            //Knife.knife.CheckState();
         }
 
         if (currentLevel - 1 == 12)

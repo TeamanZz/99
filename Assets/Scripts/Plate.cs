@@ -40,7 +40,7 @@ public class Plate : MonoBehaviour
         if (plateIsActive == false)
             return;
 
-        TakeDamage(1);
+        TakeDamage(LevelManager.levelManager.defaultDamage + LevelManager.levelManager.allDamageValue);
     }
 
     protected virtual void OnMouseEnter()
@@ -48,10 +48,10 @@ public class Plate : MonoBehaviour
         if (plateIsActive == false)
             return;
 
-        if (Knife.knife.readyToUse == false)
+        if (KnifeSystem.knife.readyToUse == false)
             return;
 
-        TakeDamage(1);
+        TakeDamage(LevelManager.levelManager.knifeDamage + LevelManager.levelManager.allDamageValue);
     }
 
     public bool TakeDamage(int damageValue)

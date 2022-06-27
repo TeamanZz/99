@@ -25,7 +25,7 @@ public class WoodPlate : Plate
 
     protected override void OnMouseEnter()
     {
-        if (Knife.knife.readyToUse == false)
+        if (KnifeSystem.knife.readyToUse == false)
             return;
 
         SFX.Instance.PlayNonDamageSound(nullDamageSoundID);

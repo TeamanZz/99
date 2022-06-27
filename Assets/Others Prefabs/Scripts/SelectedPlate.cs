@@ -107,7 +107,7 @@ public class SelectedPlate : Plate
 
     protected virtual void OnMouseEnter()
     {
-        if (Knife.knife.readyToUse == false || (currentType == SelectedPlateType.Receiver && recieverIsActive == false))
+        if (KnifeSystem.knife.readyToUse == false || (currentType == SelectedPlateType.Receiver && recieverIsActive == false))
             return;
 
         if (TakeDamage(1) == true)

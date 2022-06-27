@@ -10,16 +10,16 @@ public class ExplosivePlate : Plate
 
     protected override void OnMouseDown()
     {  
-        if (TakeDamage(1) == true)
+        if (TakeDamage(LevelManager.levelManager.defaultDamage + LevelManager.levelManager.allDamageValue) == true)
             Explotion();
     }
 
     protected override void OnMouseEnter()
     {
-        if (Knife.knife.readyToUse == false)
+        if (KnifeSystem.knife.readyToUse == false)
             return;
 
-        if (TakeDamage(1) == true)
+        if (TakeDamage(LevelManager.levelManager.knifeDamage + LevelManager.levelManager.allDamageValue) == true)
             Explotion();
     }
 

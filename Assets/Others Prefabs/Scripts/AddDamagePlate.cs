@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnifePlate : Plate
+public class AddDamagePlate : Plate
 {
     protected override void KillPlate()
     {
         base.KillPlate();
-        UseKnife();
+        UseDamageSystem();
     }
-    public void UseKnife()
+    public void UseDamageSystem()
     {
-        KnifeSystem.knife.UseKnife();
+        AddDamageSystem.damageSystem.UseDamage();
     }
 }
