@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
     public int knifeDamage = 1;
 
     public int allDamageValue = 0;
+
     private void Awake()
     {
         levelManager = this;
@@ -142,7 +143,7 @@ public class LevelManager : MonoBehaviour
         levels = new Vector2Int(startLevel, endLevel);
         Debug.Log($"Bar Levels {levels}");
 
-        coefficient = 1f / ((endLevel - startLevel) * 40);
+        coefficient = 1f / ((levels.y - levels.x) * 40);
         fillImage.fillAmount = (saveIntState * coefficient * 40) + (40 - spawner.currentTopPlates.Count) * coefficient;
         Debug.Log($"Bar Fill Value {fillImage.fillAmount}; Fill Coefficient {coefficient}");
 
@@ -168,7 +169,6 @@ public class LevelManager : MonoBehaviour
         saveIntState = 0;
         fillImage.fillAmount = 0;
 
-        valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
         InitializationBar();
     }
 
@@ -176,13 +176,10 @@ public class LevelManager : MonoBehaviour
     public void AddLevel()
     {
         currentLevel++;
-
         saveIntState++;
-
-        CheckBarToEnd();
-        UpdateBottomBar();
-
         SaveLevel();
+
+        Invoke(nameof(CheckBar), 0.05f);
 
         if (currentLevel - 1 == 3)
             AddPlate();
@@ -200,6 +197,19 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevel - 1 == 20)
             AddPlate();
+    }
+
+    public void CheckBar()
+    {
+        CheckBarToEnd();
+        UpdateBottomBar(); 
+        
+        float fillValue = (saveIntState * coefficient * 40) + (40 - spawner.currentTopPlates.Count) * coefficient;
+        Debug.Log("Fill Check Value: " + fillValue);
+        fillImage.fillAmount = fillValue; 
+        valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
+
+        SaveLevel();
     }
 
     private void AddPlate()
