@@ -24,4 +24,10 @@ public class KnifePlate : Plate
     {
         Knife.knife.UseKnife();
     }
+
+    protected override void KillPlate()
+    {
+        base.KillPlate();
+        UseKnife();
+    }
 }

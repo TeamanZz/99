@@ -61,8 +61,8 @@ public class Plate : MonoBehaviour
         if (InfoController.infoController != null)
             InfoController.infoController.touches += damageValue;
 
-        if (Knife.knife.isOpen)
-            Knife.knife.AddFillPoint(damageValue);
+        //if (Knife.knife.isOpen)
+        //    Knife.knife.AddFillPoint(damageValue);
 
         ShakePlate();
         var newParticles = Instantiate(hitParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
@@ -152,7 +152,7 @@ public class Plate : MonoBehaviour
             return null;
     }
 
-    public void KillPlate()
+    protected virtual void KillPlate()
     {
         valueToDestroy = 0;
         var newParticles = Instantiate(explodeParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);

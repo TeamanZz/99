@@ -45,8 +45,9 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevel >= 8)
         {
-            Knife.knife.isOpen = true;
-            Knife.knife.CheckState();
+            AddPlate();
+            //    Knife.knife.isOpen = true;
+            //    Knife.knife.CheckState();
         }
 
         if (currentLevel >= 12)
@@ -198,8 +199,9 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevel - 1== 8)
         {
-            Knife.knife.isOpen = true;
-            Knife.knife.CheckState();
+            AddPlate();
+            //Knife.knife.isOpen = true;
+            //Knife.knife.CheckState();
         }
 
         if (currentLevel - 1 == 12)

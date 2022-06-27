@@ -9,15 +9,13 @@ public class Knife : MonoBehaviour
 
     [Header("View Settings")]
     public Image fillImage;
-    public Button useKnifeButton;
 
     [Header("Connect Settings")]
-    public bool isOpen = false;
     public GameObject knifeGroup;
 
     [Header("Main Settings")]
-    [SerializeField] private int capacityPoints = 50;
-    public int currentPoints = 0;
+    //[SerializeField] private int capacityPoints = 50;
+    //public int currentPoints = 0;
 
     public bool readyToUse = false;
     public float knifeDuration = 5f;
@@ -26,53 +24,61 @@ public class Knife : MonoBehaviour
     public void Awake()
     {
         knife = this;
-        CheckState(); 
+        knifeGroup.SetActive(false);
+        //CheckState(); 
         
-        AddFillPoint(0);
+        //AddFillPoint(0);
     }
     
-    [ContextMenu("Check State")]
-    public void CheckState()
-    {
-        if (isOpen)
-            knifeGroup.SetActive(true);
-        else
-            knifeGroup.SetActive(false);
+    //[ContextMenu("Check State")]
+    //public void CheckState()
+    //{
+    //    if (isOpen)
+    //        knifeGroup.SetActive(true);
+    //    else
+    //        knifeGroup.SetActive(false);
 
-        if (currentPoints == capacityPoints)
-            useKnifeButton.interactable = true;
-        else
-            useKnifeButton.interactable = false;
-    }
+    //    if (currentPoints == capacityPoints)
+    //        useKnifeButton.interactable = true;
+    //    else
+    //        useKnifeButton.interactable = false;
+    //}
 
-    public void AddFillPoint(int value)
-    {
-        if (!isOpen || currentCoroutine != null)
-        {
-            return;
-        }
+    //public void AddFillPoint(int value)
+    //{
+    //    if (!isOpen || currentCoroutine != null)
+    //    {
+    //        return;
+    //    }
 
-        currentPoints += value;
-        currentPoints = Mathf.Clamp(currentPoints, 0, capacityPoints);
+    //    currentPoints += value;
+    //    currentPoints = Mathf.Clamp(currentPoints, 0, capacityPoints);
 
-        float coefficient = 1f / capacityPoints;
-        fillImage.fillAmount = coefficient * currentPoints;
+    //    float coefficient = 1f / capacityPoints;
+    //    fillImage.fillAmount = coefficient * currentPoints;
 
-        CheckState();
-        //if (currentPoints == capacityPoints)
-        //    useKnifeButton.interactable = true;
-    }
+    //    CheckState();
+    //    //if (currentPoints == capacityPoints)
+    //    //    useKnifeButton.interactable = true;
+    //}
 
     public void UseKnife()
     {
-        currentCoroutine = StartCoroutine(UsingKnife(knifeDuration)); 
-        useKnifeButton.interactable = false;
+        if (currentCoroutine != null)
+            StopCoroutine(currentCoroutine);
+
+        currentCoroutine = StartCoroutine(UsingKnife(knifeDuration));
+
+        //useKnifeButton.interactable = false;
     }
 
     private IEnumerator UsingKnife(float time)
     {
         readyToUse = true;
-        useKnifeButton.interactable = false;
+        knifeGroup.SetActive(true);
+        fillImage.fillAmount = 1;
+
+        //useKnifeButton.interactable = false;
 
         bool timerRinning = false;
         float currentTime = time;
@@ -90,7 +96,9 @@ public class Knife : MonoBehaviour
         }
         
         readyToUse = false;
-        currentPoints = 0;
+        //currentPoints = 0;
+
         currentCoroutine = null;
+        knifeGroup.SetActive(false);
     }
 }
