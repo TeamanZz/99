@@ -55,6 +55,9 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevel >= 20)
             AddPlate();
+
+        if (currentLevel >= 30)
+            AddPlate();
     }
 
     private void SaveLevel()
@@ -136,6 +139,12 @@ public class LevelManager : MonoBehaviour
             BarProcessing(15, 20);
             return;
         }
+
+        if (currentLevel - 1 < 30)
+        {
+            BarProcessing(20, 30);
+            return;
+        }
     }
 
     public void BarProcessing(int startLevel, int endLevel)
@@ -196,6 +205,9 @@ public class LevelManager : MonoBehaviour
             AddPlate();
 
         if (currentLevel - 1 == 20)
+            AddPlate();
+
+        if (currentLevel - 1 == 30)
             AddPlate();
     }
 

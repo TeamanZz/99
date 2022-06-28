@@ -3370,11 +3370,11 @@ MonoBehaviour:
   damageText: {fileID: 2116924920}
   vievGroup: {fileID: 1187788299}
   readyToUse: 0
-  knifeDuration: 3
+  knifeDuration: 1.5
   knifeDamage: 0
   knifeAddCoefficient: 1
   minValue: 1
-  maxValue: 40
+  maxValue: 15
 --- !u!4 &1808090805
 Transform:
   m_ObjectHideFlags: 0
@@ -3403,11 +3403,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1608180905}
   platesPrefabs:
-  - {fileID: 5032042809427482688, guid: 3a24060c58c0b1b47a26b27eb2e82bae, type: 3}
   - {fileID: 8168067213156279222, guid: 0c112ea883e02154eb6bedb58a380793, type: 3}
   - {fileID: 9050004875780788707, guid: 616c5f21d152e014bb7ac25177b31d0e, type: 3}
   - {fileID: 8156896389817902805, guid: 77f28f50fa396fa4cbd7654b994ccc25, type: 3}
   - {fileID: 560029952971484664, guid: 26fba5c7c1cffcf488c97ea8552a89db, type: 3}
+  - {fileID: 5032042809427482688, guid: 3a24060c58c0b1b47a26b27eb2e82bae, type: 3}
   - {fileID: 833603762797520731, guid: 27cfd0f59b4402a40b6aeb8d1229ea8c, type: 3}
   currentLevel: 99
   fillImage: {fileID: 91625484}
@@ -3438,7 +3438,7 @@ MonoBehaviour:
   damage: 0
   damageAddCoefficient: 2
   minValue: 3
-  maxValue: 40
+  maxValue: 15
 --- !u!1 &1869400221
 GameObject:
   m_ObjectHideFlags: 0
