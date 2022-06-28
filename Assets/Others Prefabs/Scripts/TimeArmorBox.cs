@@ -34,6 +34,9 @@ public class TimeArmorBox : Plate
     }
     protected override void OnMouseEnter()
     {
+        if (KnifeSystem.knife.readyToUse == false)
+            return;
+
         base.OnMouseEnter();
 
         if (plateIsActive == false)
