@@ -25,6 +25,7 @@ public class LevelManager : MonoBehaviour
 
     public Vector2Int levels;
     public TextMeshProUGUI valueText;
+    public TextMeshProUGUI levelText;
 
     [Header("Main Settings")]
     public int defaultDamage = 1;
@@ -101,7 +102,8 @@ public class LevelManager : MonoBehaviour
 
     public void InitializationBar()
     {
-        if (currentLevel > 20)
+        levelText.text = (currentLevel - 1).ToString();
+        if (currentLevel > 30)
         {
             fillImage.transform.parent.gameObject.SetActive(false);
             return;
@@ -190,24 +192,24 @@ public class LevelManager : MonoBehaviour
 
         Invoke(nameof(CheckBar), 0.05f);
 
-        if (currentLevel - 1 == 3)
+        levelText.text = (currentLevel - 1).ToString();
+
+        if (currentLevel == 3)
             AddPlate();
 
-        if (currentLevel - 1== 8)
-        {
+        if (currentLevel == 8)
             AddPlate();
-        }
-
-        if (currentLevel - 1 == 12)
+        
+        if (currentLevel == 12)
             AddPlate();
 
-        if (currentLevel - 1 == 15)
+        if (currentLevel == 15)
             AddPlate();
 
-        if (currentLevel - 1 == 20)
+        if (currentLevel == 20)
             AddPlate();
 
-        if (currentLevel - 1 == 30)
+        if (currentLevel == 30)
             AddPlate();
     }
 

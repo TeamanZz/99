@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class WoodPlate : Plate
     protected override void OnMouseDown()
     {
         SFX.Instance.PlayNonDamageSound(nullDamageSoundID);
+        LowShakePlate();
 
         if (PitchManager.pitchManager != null)
             PitchManager.pitchManager.IndexReset();
@@ -29,9 +31,15 @@ public class WoodPlate : Plate
             return;
 
         SFX.Instance.PlayNonDamageSound(nullDamageSoundID);
+        LowShakePlate();
 
         if (PitchManager.pitchManager != null)
             PitchManager.pitchManager.IndexReset();
+    }
+
+    private void LowShakePlate()
+    {
+        transform.DOShakePosition(0.1f, 0.2f, 5, 90);
     }
 
     public void DestroyWoodPlate()

@@ -26,6 +26,7 @@ public class TimeArmorBox : Plate
         if(plateIsActive == false)
         {
             SFX.Instance.PlayNonDamageSound(nullDamageSoundID);
+            LowShakePlate();
 
             if (PitchManager.pitchManager != null)
                 PitchManager.pitchManager.IndexReset();
@@ -38,10 +39,16 @@ public class TimeArmorBox : Plate
         if (plateIsActive == false)
         {
             SFX.Instance.PlayNonDamageSound(nullDamageSoundID);
+            LowShakePlate();
 
             if (PitchManager.pitchManager != null)
                 PitchManager.pitchManager.IndexReset();
         }
+    }
+
+    private void LowShakePlate()
+    {
+        transform.DOShakePosition(0.1f, 0.2f, 5, 90);
     }
 
     [ContextMenu("Debug Rotation")]
