@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
 
     [Header("Prefabs Settings")]
     public List<Plate> platesPrefabs = new List<Plate>();
+    public Plate nextPlate;
 
     [Header("Levels Manager")]
     public int currentLevel;
@@ -22,6 +23,10 @@ public class LevelManager : MonoBehaviour
     public Image fillImage;
     public int saveIntState = 0;
     public float coefficient;
+
+    public GameObject viewPlateGroup;
+    public Image viewPlateImage;
+    public TextMeshProUGUI viewPlateInfo;
 
     public Vector2Int levels;
     public TextMeshProUGUI valueText;
@@ -35,7 +40,9 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        levelManager = this;
+        levelManager = this; 
+        viewPlateGroup.SetActive(false);
+        
         LoadLevel();
         FirstLevelInitialization();
     }
@@ -180,7 +187,28 @@ public class LevelManager : MonoBehaviour
         saveIntState = 0;
         fillImage.fillAmount = 0;
 
+        OpenViewPanel();
         InitializationBar();
+    }
+
+    public void OpenViewPanel()
+    {
+        if (nextPlate == null)
+            return;
+
+        viewPlateGroup.SetActive(true);
+
+        string endString = "Congratulations!\n You opened ";
+        viewPlateInfo.text = endString + nextPlate.info.ToString();
+        
+        viewPlateImage.sprite = nextPlate.image;
+
+        nextPlate = null;
+    }
+
+    public void ClosedViewPanel()
+    {
+        viewPlateGroup.SetActive(false);
     }
 
     [ContextMenu("Add Level")]
@@ -228,6 +256,10 @@ public class LevelManager : MonoBehaviour
 
     private void AddPlate()
     {
+        nextPlate = new Plate();
+        nextPlate.image = platesPrefabs[0].image;
+        nextPlate.info = platesPrefabs[0].info;
+
         spawner.platePrefab.Add(platesPrefabs[0].gameObject);
         platesPrefabs.RemoveAt(0);
     }

@@ -26,6 +26,10 @@ public class Plate : MonoBehaviour
     public int damageSoundID = 0;
     public int destroySoundID = 0;
 
+    [Header("View")]
+    public Sprite image;
+    public string info;
+
     public void SetNewNonZeroValue(int newValue = 1)
     {
         int newValueRand = Random.Range(1, newValue + 1);
