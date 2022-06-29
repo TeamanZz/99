@@ -317,7 +317,10 @@ MonoBehaviour:
   hitParticles: {fileID: 127072, guid: 7f45705f5f30d8a45af0fc2eb8c8998a, type: 3}
   explodeParticles: {fileID: 130848, guid: 9fbfdb8d923148e4299b295c120e2246, type: 3}
   plateIsActive: 0
+  nullDamageSoundID: 0
   damageSoundID: 2
   destroySoundID: 2
+  image: {fileID: 21300000, guid: e810c1ab32f5a3947ac9c39123197403, type: 3}
+  info: Explotion Plate
   isUsed: 0
   platesFromDestroy: []

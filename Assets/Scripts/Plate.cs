@@ -26,7 +26,7 @@ public class Plate : MonoBehaviour
     public int damageSoundID = 0;
     public int destroySoundID = 0;
 
-    [Header("View")]
+    [Space(10)][Header("View")]
     public Sprite image;
     public string info;
 

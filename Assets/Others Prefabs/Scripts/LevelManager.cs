@@ -8,9 +8,10 @@ using DG.Tweening;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager levelManager;
-    
+
     [Header("Conect Settings")]
     public PlatesSpawner spawner;
+    [SerializeField] private bool isInitialization = false;
 
     [Header("Prefabs Settings")]
     public List<Plate> platesPrefabs = new List<Plate>();
@@ -20,14 +21,20 @@ public class LevelManager : MonoBehaviour
     public int currentLevel;
 
     [Header("View Bar Settings")]
+    [Space]
+    [Header("Bar")]
     public Image fillImage;
     public int saveIntState = 0;
     public float coefficient;
 
+    [Space]
+    [Header("View Plate")]
     public GameObject viewPlateGroup;
     public Image viewPlateImage;
     public TextMeshProUGUI viewPlateInfo;
 
+    [Space]
+    [Header("Levels View")]
     public Vector2Int levels;
     public TextMeshProUGUI valueText;
     public TextMeshProUGUI levelText;
@@ -40,9 +47,11 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        levelManager = this; 
+        isInitialization = false;
+
+           levelManager = this;
         viewPlateGroup.SetActive(false);
-        
+
         LoadLevel();
         FirstLevelInitialization();
     }
@@ -82,7 +91,7 @@ public class LevelManager : MonoBehaviour
 
         saveIntState = PlayerPrefs.GetInt("saveIntState");
         saveIntState -= 1;
-        
+
         InitializationBar();
     }
 
@@ -95,6 +104,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        isInitialization = true;
         spawner.StartWorking();
     }
 
@@ -113,6 +123,7 @@ public class LevelManager : MonoBehaviour
         if (currentLevel > 30)
         {
             fillImage.transform.parent.gameObject.SetActive(false);
+            nextPlate = null;
             return;
         }
         else
@@ -193,17 +204,17 @@ public class LevelManager : MonoBehaviour
 
     public void OpenViewPanel()
     {
-        if (nextPlate == null)
+        if (nextPlate == null || nextPlate.plateIsActive == false)
             return;
 
         viewPlateGroup.SetActive(true);
 
         string endString = "Congratulations!\n You opened ";
         viewPlateInfo.text = endString + nextPlate.info.ToString();
-        
+
         viewPlateImage.sprite = nextPlate.image;
 
-        nextPlate = null;
+       // nextPlate = null;
     }
 
     public void ClosedViewPanel()
@@ -227,7 +238,7 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevel == 8)
             AddPlate();
-        
+
         if (currentLevel == 12)
             AddPlate();
 
@@ -244,11 +255,11 @@ public class LevelManager : MonoBehaviour
     public void CheckBar()
     {
         CheckBarToEnd();
-        UpdateBottomBar(); 
-        
+        UpdateBottomBar();
+
         float fillValue = (saveIntState * coefficient * 40) + (40 - spawner.currentTopPlates.Count) * coefficient;
         Debug.Log("Fill Check Value: " + fillValue);
-        fillImage.fillAmount = fillValue; 
+        fillImage.fillAmount = fillValue;
         valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
 
         SaveLevel();
@@ -256,9 +267,14 @@ public class LevelManager : MonoBehaviour
 
     private void AddPlate()
     {
-        nextPlate = new Plate();
+        //Plate newPlate = new Plate();;
+        //nextPlate = newPlate;
+
+        nextPlate.plateIsActive = isInitialization;
+
         nextPlate.image = platesPrefabs[0].image;
         nextPlate.info = platesPrefabs[0].info;
+        Debug.Log($"Instatiate New plate {nextPlate} Is Active - {nextPlate.plateIsActive} | Info - {nextPlate.image} && {nextPlate.info}");
 
         spawner.platePrefab.Add(platesPrefabs[0].gameObject);
         platesPrefabs.RemoveAt(0);
