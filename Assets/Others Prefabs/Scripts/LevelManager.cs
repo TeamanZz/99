@@ -173,7 +173,7 @@ public class LevelManager : MonoBehaviour
         Debug.Log($"Bar Levels {levels}");
 
         coefficient = 1f / ((levels.y - levels.x) * 40);
-        fillImage.fillAmount = (saveIntState * coefficient * 40) + (40 - spawner.currentTopPlates.Count) * coefficient;
+        fillImage.fillAmount = Mathf.Clamp(((saveIntState * coefficient * 40) + (40 - spawner.currentTopPlates.Count) * coefficient), 0, 99);
         Debug.Log($"Bar Fill Value {fillImage.fillAmount}; Fill Coefficient {coefficient}");
 
         valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
