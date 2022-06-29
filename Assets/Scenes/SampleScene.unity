@@ -3860,12 +3860,15 @@ MonoBehaviour:
   - {fileID: 833603762797520731, guid: 27cfd0f59b4402a40b6aeb8d1229ea8c, type: 3}
   nextPlate: {fileID: 3725058296081796022, guid: 1eacd9f6352c4cc469907e0da4c463c8, type: 3}
   currentLevel: 99
+  fillViewGroup: {fileID: 753617766}
   fillImage: {fileID: 91625484}
   saveIntState: 0
   coefficient: 0
   viewPlateGroup: {fileID: 2099397987}
   viewPlateImage: {fileID: 2098228565}
   viewPlateInfo: {fileID: 839492754}
+  callBackIsActive: 0
+  callbackTime: 0.25
   levels: {x: 0, y: 0}
   valueText: {fileID: 2057808217}
   levelText: {fileID: 1908772337}

@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour
     {
         isInitialization = false;
 
-           levelManager = this;
+        levelManager = this;
         viewPlateGroup.SetActive(false);
 
         LoadLevel();
@@ -126,15 +126,17 @@ public class LevelManager : MonoBehaviour
     public void InitializationBar()
     {
         levelText.text = (currentLevel - 1).ToString();
-        if (currentLevel > 30)
+        if (callBackIsActive != true)
         {
-            fillViewGroup.SetActive(false);
-            nextPlate = null;
-            return;
+            if (currentLevel > 30)
+            {
+                fillViewGroup.SetActive(false);
+                nextPlate = null;
+                return;
+            }
+            else
+                fillViewGroup.SetActive(true);
         }
-        else
-            fillViewGroup.SetActive(true);
-
 
         if (currentLevel < 3)
         {
@@ -183,10 +185,14 @@ public class LevelManager : MonoBehaviour
         Debug.Log($"Bar Fill Value {fillImage.fillAmount}; Fill Coefficient {coefficient}");
 
         valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
+
     }
 
     public void UpdateBottomBar()
     {
+        if (callBackIsActive == true)
+            return;
+
         float fillValue = (saveIntState * coefficient * 40) + (40 - spawner.currentTopPlates.Count) * coefficient;
         fillImage.DOFillAmount(fillValue, 0.1f);
         Debug.Log($"Bar Fill Value {fillValue}");
@@ -214,6 +220,9 @@ public class LevelManager : MonoBehaviour
         if (nextPlate == null || nextPlate.plateIsActive == false)
             return;
 
+        StartCoroutine(StartCallback());
+
+        fillViewGroup.SetActive(false);
         viewPlateGroup.SetActive(true);
         valueText.gameObject.SetActive(false);
 
@@ -221,11 +230,11 @@ public class LevelManager : MonoBehaviour
         viewPlateInfo.text = endString + nextPlate.info.ToString();
 
         viewPlateImage.sprite = nextPlate.image;
+        fillImage.fillAmount = 1f;
 
-        StartCoroutine(StartCallback());
-       // nextPlate = null;
+        // nextPlate = null;
     }
-     
+
     public IEnumerator StartCallback()
     {
         callBackIsActive = true;
@@ -237,11 +246,13 @@ public class LevelManager : MonoBehaviour
     {
         if (callBackIsActive == true)
             return;
-        
+
         fillImage.fillAmount = 0;
 
         viewPlateGroup.SetActive(false);
         valueText.gameObject.SetActive(true);
+        UpdateBottomBar();
+        InitializationBar();
     }
 
     [ContextMenu("Add Level")]
