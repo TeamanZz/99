@@ -288,8 +288,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 753617767}
-  m_RootOrder: 1
+  m_Father: {fileID: 1298346947}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -309,14 +309,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.35283017, g: 0.90770614, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e73547aba13b4424e88d060572b3431b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c79a0dd8764d427459a10abe5316759b, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1365,7 +1365,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1298346947}
-  - {fileID: 91625483}
   - {fileID: 2057808216}
   m_Father: {fileID: 1610323028}
   m_RootOrder: 4
@@ -2459,6 +2458,7 @@ GameObject:
   - component: {fileID: 1298346947}
   - component: {fileID: 1298346949}
   - component: {fileID: 1298346948}
+  - component: {fileID: 1298346950}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -2476,7 +2476,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 91625483}
   m_Father: {fileID: 753617767}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2523,6 +2524,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298346946}
   m_CullTransparentMesh: 1
+--- !u!114 &1298346950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298346946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &1298411327
 GameObject:
   m_ObjectHideFlags: 0
@@ -3113,7 +3127,6 @@ MonoBehaviour:
   levelManager: {fileID: 1808090806}
   platePrefab:
   - {fileID: 4646713599037257294, guid: a2d1a7f66a53c2a4b862963c89651159, type: 3}
-  - {fileID: 4646713599037257294, guid: 616c5f21d152e014bb7ac25177b31d0e, type: 3}
   firstPlatesParent: {fileID: 1593706837}
   secondPlatesParent: {fileID: 1489199192}
   currentTopParent: {fileID: 0}
@@ -3837,6 +3850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 1608180905}
+  isInitialization: 0
   platesPrefabs:
   - {fileID: 8168067213156279222, guid: 0c112ea883e02154eb6bedb58a380793, type: 3}
   - {fileID: 9050004875780788707, guid: 616c5f21d152e014bb7ac25177b31d0e, type: 3}
@@ -4407,7 +4421,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 753617767}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}

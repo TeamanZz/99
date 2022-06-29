@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
     [Header("View Bar Settings")]
     [Space]
     [Header("Bar")]
+    public GameObject fillViewGroup;
     public Image fillImage;
     public int saveIntState = 0;
     public float coefficient;
@@ -32,6 +33,11 @@ public class LevelManager : MonoBehaviour
     public GameObject viewPlateGroup;
     public Image viewPlateImage;
     public TextMeshProUGUI viewPlateInfo;
+
+    [Space]
+    [Header("View Callback Settings")]
+    [SerializeField] private bool callBackIsActive = false;
+    [SerializeField] private float callbackTime = 0.35f;
 
     [Space]
     [Header("Levels View")]
@@ -122,12 +128,12 @@ public class LevelManager : MonoBehaviour
         levelText.text = (currentLevel - 1).ToString();
         if (currentLevel > 30)
         {
-            fillImage.transform.parent.gameObject.SetActive(false);
+            fillViewGroup.SetActive(false);
             nextPlate = null;
             return;
         }
         else
-            fillImage.transform.parent.gameObject.SetActive(true);
+            fillViewGroup.SetActive(true);
 
 
         if (currentLevel < 3)
@@ -194,9 +200,10 @@ public class LevelManager : MonoBehaviour
             return;
 
         Debug.Log("End Levels");
+        //fillImage.fillAmount = 0;
+
         coefficient = 0;
         saveIntState = 0;
-        fillImage.fillAmount = 0;
 
         OpenViewPanel();
         InitializationBar();
@@ -208,18 +215,33 @@ public class LevelManager : MonoBehaviour
             return;
 
         viewPlateGroup.SetActive(true);
+        valueText.gameObject.SetActive(false);
 
         string endString = "Congratulations!\n You opened ";
         viewPlateInfo.text = endString + nextPlate.info.ToString();
 
         viewPlateImage.sprite = nextPlate.image;
 
+        StartCoroutine(StartCallback());
        // nextPlate = null;
+    }
+     
+    public IEnumerator StartCallback()
+    {
+        callBackIsActive = true;
+        yield return new WaitForSeconds(callbackTime);
+        callBackIsActive = false;
     }
 
     public void ClosedViewPanel()
     {
+        if (callBackIsActive == true)
+            return;
+        
+        fillImage.fillAmount = 0;
+
         viewPlateGroup.SetActive(false);
+        valueText.gameObject.SetActive(true);
     }
 
     [ContextMenu("Add Level")]
