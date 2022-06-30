@@ -34,6 +34,8 @@ public class LevelManager : MonoBehaviour
     public Image viewPlateImage;
     public TextMeshProUGUI viewPlateInfo;
 
+    public Image leftView;
+
     [Space]
     [Header("View Callback Settings")]
     [SerializeField] private bool callBackIsActive = false;
@@ -186,6 +188,7 @@ public class LevelManager : MonoBehaviour
 
         valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
 
+        leftView.sprite = platesPrefabs[0].image;
     }
 
     public void UpdateBottomBar()
@@ -251,6 +254,10 @@ public class LevelManager : MonoBehaviour
 
         viewPlateGroup.SetActive(false);
         valueText.gameObject.SetActive(true);
+
+        if(platesPrefabs.Count > 1)
+        leftView.sprite = platesPrefabs[0].image;
+
         UpdateBottomBar();
         InitializationBar();
     }
@@ -307,6 +314,10 @@ public class LevelManager : MonoBehaviour
 
         nextPlate.image = platesPrefabs[0].image;
         nextPlate.info = platesPrefabs[0].info;
+
+        if (isInitialization == true && platesPrefabs.Count > 0)
+            leftView.sprite = platesPrefabs[0].image;
+
         Debug.Log($"Instatiate New plate {nextPlate} Is Active - {nextPlate.plateIsActive} | Info - {nextPlate.image} && {nextPlate.info}");
 
         spawner.platePrefab.Add(platesPrefabs[0].gameObject);
