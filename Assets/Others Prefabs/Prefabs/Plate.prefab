@@ -274,6 +274,12 @@ MonoBehaviour:
   meshRenderer: {fileID: 6592299080548358043}
   hitParticles: {fileID: 127072, guid: 7f45705f5f30d8a45af0fc2eb8c8998a, type: 3}
   explodeParticles: {fileID: 130848, guid: 9fbfdb8d923148e4299b295c120e2246, type: 3}
+  plateIsActive: 0
+  nullDamageSoundID: 0
+  damageSoundID: 0
+  destroySoundID: 0
+  image: {fileID: 0}
+  info: 
 --- !u!65 &-2922139130395073111
 BoxCollider:
   m_ObjectHideFlags: 0
