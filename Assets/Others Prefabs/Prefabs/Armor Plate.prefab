@@ -239,7 +239,7 @@ MonoBehaviour:
   nullDamageSoundID: 0
   damageSoundID: 1
   destroySoundID: 1
-  image: {fileID: 21300000, guid: 8126f46a1868a81478d642f5109459b1, type: 3}
+  image: {fileID: 21300000, guid: e0fbcceb0827b8d45a030c534702c00e, type: 3}
   info: Armor Plate
   saveValue: 0
   platePrefab: {fileID: 3725058296081796022, guid: a2d1a7f66a53c2a4b862963c89651159, type: 3}

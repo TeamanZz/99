@@ -3522,7 +3522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageSoundList:
   - {fileID: 8300000, guid: 0219e52ad5dc12d45bada8681990c061, type: 3}
-  - {fileID: 8300000, guid: ba1f07e0932d5e947a8c7c3a137984e1, type: 3}
+  - {fileID: 8300000, guid: 0219e52ad5dc12d45bada8681990c061, type: 3}
   - {fileID: 8300000, guid: 9092be51be531f74ab49cc62ff4185cf, type: 3}
   - {fileID: 8300000, guid: 65c7ec04d86987547aca1a9d98ad7f66, type: 3}
   - {fileID: 8300000, guid: 120de5fb057b54340967e065a857f05f, type: 3}
@@ -3531,7 +3531,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 120de5fb057b54340967e065a857f05f, type: 3}
   destroySoundList:
   - {fileID: 8300000, guid: dd6b300e5ac49ec49a67a6cdf7117248, type: 3}
-  - {fileID: 8300000, guid: aa93ffb059d3e28479dcb47ba3ac8bac, type: 3}
+  - {fileID: 8300000, guid: dd6b300e5ac49ec49a67a6cdf7117248, type: 3}
   - {fileID: 8300000, guid: 56a36ebf76dd5c1418f8205ae89e47bd, type: 3}
   - {fileID: 8300000, guid: 6229c5671f7bda744988c5b6e99bf38d, type: 3}
   - {fileID: 8300000, guid: 92bb992f3871c01458adb7138fef3122, type: 3}

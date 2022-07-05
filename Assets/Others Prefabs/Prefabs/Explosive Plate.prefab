@@ -239,8 +239,8 @@ MonoBehaviour:
   nullDamageSoundID: 0
   damageSoundID: 2
   destroySoundID: 2
-  image: {fileID: 21300000, guid: e810c1ab32f5a3947ac9c39123197403, type: 3}
-  info: Explotion Plate
+  image: {fileID: 21300000, guid: b1c42f08baca29b4c858b4f53ccda79a, type: 3}
+  info: Explosive Plate
   isUsed: 0
   platesFromDestroy: []
 --- !u!1001 &398701604658344163

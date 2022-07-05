@@ -142,43 +142,44 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevel < 3)
         {
-            BarProcessing(1, 3);
+            BarProcessing(1, 3, 0);
             return;
         }
 
         if (currentLevel - 1 < 8)
         {
-            BarProcessing(3, 8);
+            BarProcessing(3, 8, 1);
             return;
         }
 
         if (currentLevel - 1 < 12)
         {
-            BarProcessing(8, 12);
+            BarProcessing(8, 12, 2);
             return;
         }
 
         if (currentLevel - 1 < 15)
         {
-            BarProcessing(12, 15);
+            BarProcessing(12, 15, 3);
             return;
         }
 
         if (currentLevel - 1 < 20)
         {
-            BarProcessing(15, 20);
+            BarProcessing(15, 20, 4);
             return;
         }
 
         if (currentLevel - 1 < 30)
         {
-            BarProcessing(20, 30);
+            BarProcessing(20, 30, 5);
             return;
         }
     }
 
-    public void BarProcessing(int startLevel, int endLevel)
+    public void BarProcessing(int startLevel, int endLevel, int plateIndex)
     {
+        Debug.Log($"Plate Index {plateIndex}");
         levels = new Vector2Int(startLevel, endLevel);
         Debug.Log($"Bar Levels {levels}");
 
@@ -188,7 +189,8 @@ public class LevelManager : MonoBehaviour
 
         valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
 
-        leftView.sprite = platesPrefabs[0].image;
+        Debug.Log(nextPlate.gameObject.name);
+        leftView.sprite = nextPlate.image;
     }
 
     public void UpdateBottomBar()
@@ -255,8 +257,8 @@ public class LevelManager : MonoBehaviour
         viewPlateGroup.SetActive(false);
         valueText.gameObject.SetActive(true);
 
-        if(platesPrefabs.Count > 1)
-        leftView.sprite = platesPrefabs[0].image;
+        if (platesPrefabs.Count > 1)
+            leftView.sprite = nextPlate.image;
 
         UpdateBottomBar();
         InitializationBar();
@@ -316,7 +318,7 @@ public class LevelManager : MonoBehaviour
         nextPlate.info = platesPrefabs[0].info;
 
         if (isInitialization == true && platesPrefabs.Count > 0)
-            leftView.sprite = platesPrefabs[0].image;
+            leftView.sprite = nextPlate.image;
 
         Debug.Log($"Instatiate New plate {nextPlate} Is Active - {nextPlate.plateIsActive} | Info - {nextPlate.image} && {nextPlate.info}");
 

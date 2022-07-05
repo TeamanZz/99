@@ -292,7 +292,7 @@ MonoBehaviour:
   nullDamageSoundID: 0
   damageSoundID: 0
   destroySoundID: 0
-  image: {fileID: 21300000, guid: 0bd10802baec7fc40b8dcdecc0731459, type: 3}
+  image: {fileID: 21300000, guid: 4c2e361e07d64d34da58322fa43d6f34, type: 3}
   info: Knife Plate
 --- !u!1001 &7026816670949865063
 PrefabInstance:

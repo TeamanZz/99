@@ -292,7 +292,7 @@ MonoBehaviour:
   nullDamageSoundID: 0
   damageSoundID: 0
   destroySoundID: 0
-  image: {fileID: 21300000, guid: dd2eda514d6d75d43bb8b958ff0fa798, type: 3}
+  image: {fileID: 21300000, guid: fc816322a9d9d2e4e8900d39b2ddb713, type: 3}
   info: Add Damage Plate
 --- !u!1001 &8777478493346073276
 PrefabInstance:

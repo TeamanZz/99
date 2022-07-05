@@ -239,7 +239,7 @@ MonoBehaviour:
   nullDamageSoundID: 0
   damageSoundID: 3
   destroySoundID: 3
-  image: {fileID: 21300000, guid: f889be4c763003b4f9bf21b87f4eb0db, type: 3}
+  image: {fileID: 21300000, guid: 1e0bb871cf3b09a43ba43e51c3ca517f, type: 3}
   info: Time Armor Plate
   mainObject: {fileID: 0}
   timeToProtection: 1.5
