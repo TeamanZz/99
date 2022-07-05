@@ -314,8 +314,8 @@ public class LevelManager : MonoBehaviour
 
         nextPlate.plateIsActive = isInitialization;
 
-        nextPlate.image = platesPrefabs[0].image;
-        nextPlate.info = platesPrefabs[0].info;
+        // nextPlate.image = platesPrefabs[0].image;
+        // nextPlate.info = platesPrefabs[0].info;
 
         if (isInitialization == true && platesPrefabs.Count > 0)
             leftView.sprite = nextPlate.image;
