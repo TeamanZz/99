@@ -70,19 +70,19 @@ public class LevelManager : MonoBehaviour
         if (currentLevel >= 3)
             AddPlate();
 
-        if (currentLevel >= 8)
+        if (currentLevel >= 5)
             AddPlate();
 
-        if (currentLevel >= 12)
+        if (currentLevel >= 7)
             AddPlate();
 
-        if (currentLevel >= 15)
+        if (currentLevel >= 9)
             AddPlate();
 
-        if (currentLevel >= 20)
+        if (currentLevel >= 11)
             AddPlate();
 
-        if (currentLevel >= 30)
+        if (currentLevel >= 13)
             AddPlate();
 
         ClosedViewPanel();
@@ -133,7 +133,7 @@ public class LevelManager : MonoBehaviour
         levelText.text = (currentLevel - 1).ToString();
         if (callBackIsActive != true)
         {
-            if (currentLevel > 30)
+            if (currentLevel > 13)
             {
                 fillViewGroup.SetActive(false);
                 nextPlate = null;
@@ -149,33 +149,33 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        if (currentLevel - 1 < 8)
+        if (currentLevel - 1 < 5)
         {
-            BarProcessing(3, 8, 1);
+            BarProcessing(3, 5, 1);
             return;
         }
 
-        if (currentLevel - 1 < 12)
+        if (currentLevel - 1 < 7)
         {
-            BarProcessing(8, 12, 2);
+            BarProcessing(5, 7, 2);
             return;
         }
 
-        if (currentLevel - 1 < 15)
+        if (currentLevel - 1 < 9)
         {
-            BarProcessing(12, 15, 3);
+            BarProcessing(7, 9, 3);
             return;
         }
 
-        if (currentLevel - 1 < 20)
+        if (currentLevel - 1 < 11)
         {
-            BarProcessing(15, 20, 4);
+            BarProcessing(9, 11, 4);
             return;
         }
 
-        if (currentLevel - 1 < 30)
+        if (currentLevel - 1 < 13)
         {
-            BarProcessing(20, 30, 5);
+            BarProcessing(11, 13, 5);
             return;
         }
     }
@@ -192,6 +192,8 @@ public class LevelManager : MonoBehaviour
 
         valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
 
+        if (platesPrefabs.Count <= 0)
+            return;
         leftView.sprite = platesPrefabs[0].image;
         Debug.Log("ASASASASA" + platesPrefabs[0].backImage.name);
         leftViewBack.sprite = platesPrefabs[0].backImage;
@@ -285,19 +287,19 @@ public class LevelManager : MonoBehaviour
         if (currentLevel == 3)
             AddPlate();
 
-        if (currentLevel == 8)
+        if (currentLevel == 5)
             AddPlate();
 
-        if (currentLevel == 12)
+        if (currentLevel == 7)
             AddPlate();
 
-        if (currentLevel == 15)
+        if (currentLevel == 9)
             AddPlate();
 
-        if (currentLevel == 20)
+        if (currentLevel == 11)
             AddPlate();
 
-        if (currentLevel == 30)
+        if (currentLevel == 13)
             AddPlate();
     }
 
@@ -322,13 +324,14 @@ public class LevelManager : MonoBehaviour
         nextPlate.plateIsActive = isInitialization;
 
         nextPlate.image = platesPrefabs[0].image;
+        nextPlate.backImage = platesPrefabs[0].backImage;
         nextPlate.info = platesPrefabs[0].info;
 
         if (isInitialization == true && platesPrefabs.Count > 0)
         {
             leftView.sprite = nextPlate.image;
-            Debug.Log("HEHEHE");
             leftViewBack.sprite = nextPlate.backImage;
+            Debug.Log("HEHEHE");
         }
 
         Debug.Log($"Instatiate New plate {nextPlate} Is Active - {nextPlate.plateIsActive} | Info - {nextPlate.image} && {nextPlate.info}");

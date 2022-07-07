@@ -3439,6 +3439,7 @@ MonoBehaviour:
   levelManager: {fileID: 1808090806}
   platePrefab:
   - {fileID: 4646713599037257294, guid: a2d1a7f66a53c2a4b862963c89651159, type: 3}
+  - {fileID: 4646713599037257294, guid: 616c5f21d152e014bb7ac25177b31d0e, type: 3}
   firstPlatesParent: {fileID: 1593706837}
   secondPlatesParent: {fileID: 1489199192}
   currentTopParent: {fileID: 0}

@@ -23,7 +23,7 @@ public class TimeArmorBox : Plate
     {
         base.OnMouseDown();
 
-        if(plateIsActive == false)
+        if (plateIsActive == false)
         {
             SFX.Instance.PlayNonDamageSound(nullDamageSoundID);
             LowShakePlate();
@@ -65,7 +65,7 @@ public class TimeArmorBox : Plate
     {
         //mainCollider.enabled = false;
         plateIsActive = false;
-        mainObject.transform.DOLocalRotate(new Vector3(0, 90, -180f), ratationTime, RotateMode.Fast);
+        mainObject.transform.DORotate(new Vector3(0, 0, 90f), ratationTime, RotateMode.Fast);
 
         yield return new WaitForSeconds(timeToProtection);
         StartCoroutine(StopProtection());
@@ -73,7 +73,7 @@ public class TimeArmorBox : Plate
 
     public IEnumerator StopProtection()
     {
-        mainObject.transform.DOLocalRotate(new Vector3(0, 0, -180f), ratationTime, RotateMode.Fast);
+        mainObject.transform.DORotate(new Vector3(0, 0, 0f), ratationTime, RotateMode.Fast);
         plateIsActive = true;
         //mainCollider.enabled = true;
 
