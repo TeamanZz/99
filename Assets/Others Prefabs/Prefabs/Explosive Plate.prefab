@@ -56,7 +56,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4471081021614032438, guid: b51d88c5a25a036459cbf941b1f572a1, type: 2}
+  - {fileID: 7282539439868034574, guid: 67572d5f7931e7743aadb68179cefb12, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 99
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b51d88c5a25a036459cbf941b1f572a1, type: 2}
-  m_sharedMaterial: {fileID: 4471081021614032438, guid: b51d88c5a25a036459cbf941b1f572a1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 67572d5f7931e7743aadb68179cefb12, type: 2}
+  m_sharedMaterial: {fileID: 7282539439868034574, guid: 67572d5f7931e7743aadb68179cefb12, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -240,6 +240,7 @@ MonoBehaviour:
   damageSoundID: 2
   destroySoundID: 2
   image: {fileID: 21300000, guid: b1c42f08baca29b4c858b4f53ccda79a, type: 3}
+  backImage: {fileID: 21300000, guid: 15dd67374cf29a34285d23a1e6ea6f7b, type: 3}
   info: Armor Plate
   isUsed: 0
   platesFromDestroy: []

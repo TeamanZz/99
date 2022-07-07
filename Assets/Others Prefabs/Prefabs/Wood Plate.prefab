@@ -242,6 +242,7 @@ MonoBehaviour:
   damageSoundID: 4
   destroySoundID: 4
   image: {fileID: 21300000, guid: df5d78f84c880ec4ea5a4b17c8d484f4, type: 3}
+  backImage: {fileID: 21300000, guid: 9e280dccaa4a3e440857fc71a42e0bc6, type: 3}
   info: Wood Plate
   mainPlatePrefab: {fileID: 3725058296081796022, guid: a2d1a7f66a53c2a4b862963c89651159, type: 3}
   saveValue: 0

@@ -56,7 +56,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4471081021614032438, guid: b51d88c5a25a036459cbf941b1f572a1, type: 2}
+  - {fileID: 7282539439868034574, guid: 67572d5f7931e7743aadb68179cefb12, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,8 +102,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b51d88c5a25a036459cbf941b1f572a1, type: 2}
-  m_sharedMaterial: {fileID: 4471081021614032438, guid: b51d88c5a25a036459cbf941b1f572a1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 67572d5f7931e7743aadb68179cefb12, type: 2}
+  m_sharedMaterial: {fileID: 7282539439868034574, guid: 67572d5f7931e7743aadb68179cefb12, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -293,6 +293,7 @@ MonoBehaviour:
   damageSoundID: 0
   destroySoundID: 0
   image: {fileID: 21300000, guid: 4c2e361e07d64d34da58322fa43d6f34, type: 3}
+  backImage: {fileID: 21300000, guid: 786fc4f7fc768db44a3f82d423b34728, type: 3}
   info: Knife Plate
 --- !u!1001 &7026816670949865063
 PrefabInstance:

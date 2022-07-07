@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
     public TextMeshProUGUI viewPlateInfo;
 
     public Image leftView;
+    public Image leftViewBack;
 
     [Space]
     [Header("View Callback Settings")]
@@ -83,6 +84,8 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevel >= 30)
             AddPlate();
+
+        ClosedViewPanel();
     }
 
     private void SaveLevel()
@@ -176,7 +179,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
     }
-
+    //
     public void BarProcessing(int startLevel, int endLevel, int plateIndex)
     {
         Debug.Log($"Plate Index {plateIndex}");
@@ -189,8 +192,9 @@ public class LevelManager : MonoBehaviour
 
         valueText.text = Mathf.RoundToInt(fillImage.fillAmount * 100).ToString() + "%";
 
-        Debug.Log(nextPlate.gameObject.name);
-        leftView.sprite = nextPlate.image;
+        leftView.sprite = platesPrefabs[0].image;
+        Debug.Log("ASASASASA" + platesPrefabs[0].backImage.name);
+        leftViewBack.sprite = platesPrefabs[0].backImage;
     }
 
     public void UpdateBottomBar()
@@ -258,7 +262,10 @@ public class LevelManager : MonoBehaviour
         valueText.gameObject.SetActive(true);
 
         if (platesPrefabs.Count > 1)
-            leftView.sprite = nextPlate.image;
+        {
+            leftView.sprite = platesPrefabs[0].image;
+            leftViewBack.sprite = platesPrefabs[0].backImage;
+        }
 
         UpdateBottomBar();
         InitializationBar();
@@ -314,11 +321,15 @@ public class LevelManager : MonoBehaviour
 
         nextPlate.plateIsActive = isInitialization;
 
-        // nextPlate.image = platesPrefabs[0].image;
-        // nextPlate.info = platesPrefabs[0].info;
+        nextPlate.image = platesPrefabs[0].image;
+        nextPlate.info = platesPrefabs[0].info;
 
         if (isInitialization == true && platesPrefabs.Count > 0)
+        {
             leftView.sprite = nextPlate.image;
+            Debug.Log("HEHEHE");
+            leftViewBack.sprite = nextPlate.backImage;
+        }
 
         Debug.Log($"Instatiate New plate {nextPlate} Is Active - {nextPlate.plateIsActive} | Info - {nextPlate.image} && {nextPlate.info}");
 

@@ -26,8 +26,10 @@ public class Plate : MonoBehaviour
     public int damageSoundID = 0;
     public int destroySoundID = 0;
 
-    [Space(10)][Header("View")]
+    [Space(10)]
+    [Header("View")]
     public Sprite image;
+    public Sprite backImage;
     public string info;
 
     public void SetNewNonZeroValue(int newValue = 1)
@@ -95,7 +97,7 @@ public class Plate : MonoBehaviour
         CheckAdjacentPlates();
         KillPlate();
     }
-    
+
     public void UpdateTextValue()
     {
         valueText.text = valueToDestroy.ToString();
@@ -146,7 +148,7 @@ public class Plate : MonoBehaviour
         if (PlatesSpawner.Instance.currentCordPlates[newPosition] != null)
         {
             WoodPlate currentWoodPlate = PlatesSpawner.Instance.currentCordPlates[newPosition].GetComponent<WoodPlate>();
-            
+
             if (currentWoodPlate != null)
                 return currentWoodPlate;
             else

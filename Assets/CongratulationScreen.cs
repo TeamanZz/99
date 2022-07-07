@@ -18,7 +18,7 @@ public class CongratulationScreen : MonoBehaviour
     private void OnEnable()
     {
         backgroundImage.color = new Color(0, 0, 0, 0);
-        backgroundImage.DOFade(1, 0.5f);
+        backgroundImage.DOFade(0.06f, 0.5f);
 
         newPlateImage.localScale = Vector3.zero;
         doneButton.transform.localScale = Vector3.zero;
