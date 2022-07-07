@@ -294,7 +294,8 @@ MonoBehaviour:
   destroySoundID: 0
   image: {fileID: 21300000, guid: 4c2e361e07d64d34da58322fa43d6f34, type: 3}
   backImage: {fileID: 21300000, guid: 786fc4f7fc768db44a3f82d423b34728, type: 3}
-  info: Knife Plate
+  info: Knife plate
+  infoBottom: Hold and drag finger to slice plates!
 --- !u!1001 &7026816670949865063
 PrefabInstance:
   m_ObjectHideFlags: 0

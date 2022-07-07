@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour
     public GameObject viewPlateGroup;
     public Image viewPlateImage;
     public TextMeshProUGUI viewPlateInfo;
+    public TextMeshProUGUI bottomViewPlateInfo;
 
     public Image leftView;
     public Image leftViewBack;
@@ -239,6 +240,8 @@ public class LevelManager : MonoBehaviour
 
         string endString = "Congratulations!\n You opened ";
         viewPlateInfo.text = endString + nextPlate.info.ToString();
+        Debug.Log(nextPlate.infoBottom);
+        bottomViewPlateInfo.text = nextPlate.infoBottom;
 
         viewPlateImage.sprite = nextPlate.image;
         fillImage.fillAmount = 1f;
@@ -326,6 +329,7 @@ public class LevelManager : MonoBehaviour
         nextPlate.image = platesPrefabs[0].image;
         nextPlate.backImage = platesPrefabs[0].backImage;
         nextPlate.info = platesPrefabs[0].info;
+        nextPlate.infoBottom = platesPrefabs[0].infoBottom;
 
         if (isInitialization == true && platesPrefabs.Count > 0)
         {

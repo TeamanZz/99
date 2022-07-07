@@ -31,6 +31,7 @@ public class Plate : MonoBehaviour
     public Sprite image;
     public Sprite backImage;
     public string info;
+    public string infoBottom;
 
     public void SetNewNonZeroValue(int newValue = 1)
     {

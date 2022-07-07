@@ -294,7 +294,8 @@ MonoBehaviour:
   destroySoundID: 0
   image: {fileID: 21300000, guid: fc816322a9d9d2e4e8900d39b2ddb713, type: 3}
   backImage: {fileID: 21300000, guid: bc9540a1646392640b079d18a2aaee6e, type: 3}
-  info: Add Damage Plate
+  info: Damage plate
+  infoBottom: Strong fingers!
 --- !u!1001 &8777478493346073276
 PrefabInstance:
   m_ObjectHideFlags: 0

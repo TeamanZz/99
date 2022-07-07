@@ -69,4 +69,5 @@ MonoBehaviour:
   destroySoundID: 0
   image: {fileID: 21300000, guid: e0fbcceb0827b8d45a030c534702c00e, type: 3}
   backImage: {fileID: 21300000, guid: b0f27057e360cab43a47ec50bf803593, type: 3}
-  info: Armor Plate
+  info: Armor plate
+  infoBottom: Break the armor to open the tile!

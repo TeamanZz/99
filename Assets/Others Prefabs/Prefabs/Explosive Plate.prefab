@@ -241,7 +241,8 @@ MonoBehaviour:
   destroySoundID: 2
   image: {fileID: 21300000, guid: b1c42f08baca29b4c858b4f53ccda79a, type: 3}
   backImage: {fileID: 21300000, guid: 15dd67374cf29a34285d23a1e6ea6f7b, type: 3}
-  info: Armor Plate
+  info: Explosive plate
+  infoBottom: Achoo!
   isUsed: 0
   platesFromDestroy: []
 --- !u!1001 &398701604658344163
@@ -307,6 +308,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: 914b4ffc5e634cb4c8a8890b2e862ff0, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -849867405023671905, guid: 950d628ab5444744c8b28e03dee380c9, type: 3}
     - target: {fileID: 919132149155446097, guid: 914b4ffc5e634cb4c8a8890b2e862ff0, type: 3}
       propertyPath: m_Name
       value: Bomb
