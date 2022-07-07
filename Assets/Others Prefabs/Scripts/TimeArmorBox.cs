@@ -65,7 +65,7 @@ public class TimeArmorBox : Plate
     {
         //mainCollider.enabled = false;
         plateIsActive = false;
-        mainObject.transform.DORotate(new Vector3(0, 0, 90f), ratationTime, RotateMode.Fast);
+        mainObject.transform.DORotate(new Vector3(0, 0, -90f), ratationTime, RotateMode.Fast);
 
         yield return new WaitForSeconds(timeToProtection);
         StartCoroutine(StopProtection());

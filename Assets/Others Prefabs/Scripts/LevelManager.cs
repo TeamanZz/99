@@ -321,26 +321,32 @@ public class LevelManager : MonoBehaviour
 
     private void AddPlate()
     {
-        //Plate newPlate = new Plate();;
-        //nextPlate = newPlate;
+        if (nextPlate == null)
+            return;
 
         nextPlate.plateIsActive = isInitialization;
 
-        nextPlate.image = platesPrefabs[0].image;
-        nextPlate.backImage = platesPrefabs[0].backImage;
-        nextPlate.info = platesPrefabs[0].info;
-        nextPlate.infoBottom = platesPrefabs[0].infoBottom;
-
-        if (isInitialization == true && platesPrefabs.Count > 0)
+        if (platesPrefabs.Count > 0)
         {
-            leftView.sprite = nextPlate.image;
-            leftViewBack.sprite = nextPlate.backImage;
-            Debug.Log("HEHEHE");
+            nextPlate.image = platesPrefabs[0].image;
+            nextPlate.backImage = platesPrefabs[0].backImage;
+            nextPlate.info = platesPrefabs[0].info;
+            nextPlate.infoBottom = platesPrefabs[0].infoBottom;
+
+            if (isInitialization == true)
+            {
+                leftView.sprite = nextPlate.image;
+                leftViewBack.sprite = nextPlate.backImage;
+                Debug.Log("HEHEHE");
+            }
+
+            Debug.Log($"Instatiate New plate {nextPlate} Is Active - {nextPlate.plateIsActive} | Info - {nextPlate.image} && {nextPlate.info}");
         }
 
-        Debug.Log($"Instatiate New plate {nextPlate} Is Active - {nextPlate.plateIsActive} | Info - {nextPlate.image} && {nextPlate.info}");
-
-        spawner.platePrefab.Add(platesPrefabs[0].gameObject);
-        platesPrefabs.RemoveAt(0);
+        if (platesPrefabs.Count > 0)
+        {
+            spawner.platePrefab.Add(platesPrefabs[0].gameObject);
+            platesPrefabs.RemoveAt(0);
+        }
     }
 }
